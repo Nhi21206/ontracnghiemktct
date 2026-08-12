@@ -274,53 +274,6 @@
         </div>
     </div>
 
-    <!-- Apps Script Config Modal -->
-    <div id="gasModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 hidden animate-fade-in">
-        <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-700 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-start mb-4">
-                <div class="flex items-center space-x-2 text-blue-600 dark:text-blue-400">
-                    <i class="fa-solid fa-code text-xl"></i>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Hướng dẫn đưa lên Google Apps Script</h3>
-                </div>
-                <button onclick="closeGasModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-            
-            <div class="space-y-4 text-sm text-slate-600 dark:text-slate-300">
-                <p>Bạn có thể dễ dàng nhúng toàn bộ trang web này vào dự án Apps Script bằng 3 bước sau:</p>
-                
-                <div class="space-y-2">
-                    <span class="font-bold text-slate-800 dark:text-slate-200">Bước 1: Tạo tệp <code class="bg-slate-100 dark:bg-slate-700 px-1.5 py-0.5 rounded text-blue-600 dark:text-blue-400">Code.gs</code> trong Google Apps Script</span>
-                    <div class="bg-slate-900 text-slate-100 p-3 rounded-lg font-mono text-xs overflow-x-auto relative group">
-                        <pre id="gsCode">function doGet() {
-  return HtmlService.createHtmlOutputFromFile('index')
-      .setTitle('Ôn Tập Kinh Tế Chính Trị Mác - Lênin')
-      .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
-      .addMetaTag('viewport', 'width=device-width, initial-scale=1');
-}</pre>
-                        <button onclick="copyGsCode()" class="absolute top-2 right-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] px-2 py-1 rounded border border-slate-700">Copy</button>
-                    </div>
-                </div>
-
-                <div class="space-y-1">
-                    <span class="font-bold text-slate-800 dark:text-slate-200">Bước 2: Tạo tệp HTML tên <code class="bg-slate-100 dark:bg-slate-700 px-1.5 py-0.5 rounded text-blue-600 dark:text-blue-400">index.html</code></span>
-                    <p class="text-xs">Dán toàn bộ mã nguồn của file HTML này vào tệp `index.html` trong Apps Script.</p>
-                </div>
-
-                <div class="space-y-1">
-                    <span class="font-bold text-slate-800 dark:text-slate-200">Bước 3: Xuất bản Web App</span>
-                    <p class="text-xs">Nhấp <strong>Deploy (Thực thi)</strong> &rarr; <strong>New deployment (Chế độ triển khai mới)</strong> &rarr; Chọn kiểu <strong>Web app</strong> &rarr; Đặt Execute as: <strong>Me</strong> & Who has access: <strong>Anyone</strong>.</p>
-                </div>
-            </div>
-
-            <div class="mt-6 flex justify-end">
-                <button onclick="closeGasModal()" class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-white px-4 py-2 rounded-xl text-sm font-semibold transition">
-                    Đã hiểu
-                </button>
-            </div>
-        </div>
-    </div>
 
     <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
