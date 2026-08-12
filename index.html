@@ -1,0 +1,3036 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luyện Trắc Nghiệm Kinh Tế Chính Trị Mác - Lênin</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(156, 163, 175, 0.5);
+      border-radius: 4px;
+    }
+    .dark .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(75, 85, 99, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-full flex flex-col transition-colors duration-200">
+
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-800/90 backdrop-blur border-b border-slate-200 dark:border-slate-700 shadow-sm transition-colors duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo / Title -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="navigateToView('dashboard')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20">
+          <i class="fa-solid fa-graduation-cap text-lg"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-lg leading-tight bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">
+            Kinh Tế Chính Trị
+          </h1>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Ôn Thi Trắc Nghiệm Mác - Lênin</p>
+        </div>
+      </div>
+
+      <!-- Center Info / Timer in Exam Mode -->
+      <div id="header-center-info" class="hidden md:flex items-center gap-4">
+        <span id="active-chapter-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+          Chương 1
+        </span>
+        <div id="exam-timer-container" class="hidden flex items-center gap-2 px-3 py-1 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300 rounded-full border border-amber-200 dark:border-amber-800 font-mono font-bold text-sm">
+          <i class="fa-regular fa-clock animate-pulse"></i>
+          <span id="exam-timer">00:00</span>
+        </div>
+      </div>
+
+      <!-- Controls Right -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Font Size Controls -->
+        <div class="hidden sm:flex items-center bg-slate-100 dark:bg-slate-700/60 rounded-lg p-1 border border-slate-200 dark:border-slate-600">
+          <button onclick="changeFontSize(-1)" class="w-7 h-7 flex items-center justify-center rounded text-xs hover:bg-white dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 transition" title="Giảm cỡ chữ">A-</button>
+          <button onclick="changeFontSize(1)" class="w-7 h-7 flex items-center justify-center rounded text-xs hover:bg-white dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 transition font-bold" title="Tăng cỡ chữ">A+</button>
+        </div>
+
+        <!-- Dark Mode Toggle -->
+        <button id="dark-mode-btn" onclick="toggleDarkMode()" class="w-9 h-9 rounded-lg flex items-center justify-center bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 transition border border-slate-200 dark:border-slate-600" title="Chuyển chế độ sáng/tối">
+          <i class="fa-solid fa-moon dark:hidden"></i>
+          <i class="fa-solid fa-sun hidden dark:block"></i>
+        </button>
+
+        <!-- Question Grid Toggle (Mobile / Practice) -->
+        <button id="grid-toggle-btn" onclick="toggleQuestionPaletteDrawer()" class="hidden w-9 h-9 rounded-lg items-center justify-center bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300 transition border border-slate-200 dark:border-slate-600" title="Danh sách câu hỏi">
+          <i class="fa-solid fa-border-all"></i>
+        </button>
+
+        <!-- Home / Dashboard -->
+        <button onclick="navigateToView('dashboard')" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-medium transition shadow-sm flex items-center gap-1.5">
+          <i class="fa-solid fa-house"></i>
+          <span class="hidden sm:inline">Trang Chủ</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row gap-6">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-64 lg:w-72 flex-shrink-0 space-y-4">
+      
+      <!-- User Overall Progress Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Tiến độ chung</span>
+          <span id="overall-percentage" class="text-xs font-bold text-indigo-600 dark:text-indigo-400">0%</span>
+        </div>
+        <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden mb-3">
+          <div id="overall-progress-bar" class="bg-gradient-to-r from-indigo-500 to-violet-600 h-2.5 rounded-full w-0 transition-all duration-500"></div>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-center text-xs">
+          <div class="bg-slate-50 dark:bg-slate-700/50 p-2 rounded-xl">
+            <div id="total-completed-count" class="font-bold text-slate-800 dark:text-slate-200">0/140</div>
+            <div class="text-[10px] text-slate-400">Đã hoàn thành</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-700/50 p-2 rounded-xl">
+            <div id="overall-accuracy" class="font-bold text-emerald-600 dark:text-emerald-400">0%</div>
+            <div class="text-[10px] text-slate-400">Tỷ lệ chính xác</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Menu -->
+      <div class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-sm border border-slate-200 dark:border-slate-700">
+        <div class="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Danh Mục Chương</div>
+        <nav id="chapter-nav-list" class="space-y-1">
+          <!-- Dynamically populated -->
+        </nav>
+
+        <div class="my-3 border-t border-slate-100 dark:border-slate-700"></div>
+
+        <div class="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Chế Độ Khác</div>
+        <div class="space-y-1">
+          <button onclick="startMockExam()" class="w-full text-left px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition flex items-center justify-between group">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-clock-rotate-left text-amber-500"></i>
+              <span>Thi Thử Tổng Hợp</span>
+            </div>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300 font-bold">40 Câụ</span>
+          </button>
+          
+          <button onclick="startReviewMistakesMode()" class="w-full text-left px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition flex items-center justify-between group">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-triangle-exclamation text-rose-500"></i>
+              <span>Ôn Cấu Làm Sai</span>
+            </div>
+            <span id="mistakes-count-badge" class="text-[10px] px-1.5 py-0.5 rounded bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300 font-bold">0</span>
+          </button>
+
+          <button onclick="startBookmarksMode()" class="w-full text-left px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60 transition flex items-center justify-between group">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-bookmark text-indigo-500"></i>
+              <span>Câu Hỏi Đã Lưu</span>
+            </div>
+            <span id="bookmarks-count-badge" class="text-[10px] px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300 font-bold">0</span>
+          </button>
+        </div>
+
+        <div class="my-3 border-t border-slate-100 dark:border-slate-700"></div>
+
+        <button onclick="confirmResetData()" class="w-full text-left px-3 py-2 rounded-xl text-xs text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition flex items-center gap-2">
+          <i class="fa-solid fa-rotate-right"></i>
+          <span>Xóa dữ liệu làm bài</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col min-w-0">
+      
+      <!-- VIEW 1: Dashboard Overview -->
+      <section id="view-dashboard" class="space-y-6">
+        <!-- Banner -->
+        <div class="relative overflow-hidden bg-gradient-to-r from-indigo-600 via-indigo-700 to-violet-800 rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-indigo-500/10">
+          <div class="relative z-10 max-w-2xl">
+            <span class="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur text-xs font-semibold mb-3">Hệ thống trắc nghiệm thông minh</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold mb-2 tracking-tight">Kinh Tế Chính Trị Mác - Lênin</h2>
+            <p class="text-indigo-100 text-xs sm:text-sm leading-relaxed mb-6">
+              Hệ thống tổng hợp đầy đủ nội dung câu hỏi trắc nghiệm chia theo từng chương rõ ràng. Hỗ trợ chế độ luyện tập ngay, thi thử tính giờ và tự động theo dõi tiến độ học tập.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="startChapterPractice('chuong1')" class="px-5 py-2.5 rounded-xl bg-white text-indigo-700 font-semibold text-xs sm:text-sm shadow-md hover:bg-indigo-50 transition flex items-center gap-2">
+                <i class="fa-solid fa-play"></i> Bắt Đầu Từ Chương 1
+              </button>
+              <button onclick="startMockExam()" class="px-5 py-2.5 rounded-xl bg-indigo-500/40 hover:bg-indigo-500/60 border border-white/20 text-white font-semibold text-xs sm:text-sm transition flex items-center gap-2">
+                <i class="fa-solid fa-bolt"></i> Thi Thử 40 Câu
+              </button>
+            </div>
+          </div>
+          <!-- Decorative Background Elements -->
+          <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+        </div>
+
+        <!-- Search & Filter Bar -->
+        <div class="flex flex-col sm:flex-row gap-3 items-center justify-between">
+          <div class="relative w-full sm:w-80">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+            <input type="text" id="dashboard-search-input" oninput="handleSearchQuestions(this.value)" placeholder="Tìm kiếm câu hỏi theo từ khóa..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm transition">
+          </div>
+          <div id="search-results-count" class="text-xs text-slate-500 dark:text-slate-400 font-medium">
+            Tổng cộng <span class="font-bold text-indigo-600 dark:text-indigo-400">140</span> câu hỏi
+          </div>
+        </div>
+
+        <!-- Search Results Panel (hidden by default) -->
+        <div id="search-results-panel" class="hidden bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+          <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-700 pb-2">
+            <h3 class="text-sm font-bold">Kết quả tìm kiếm</h3>
+            <button onclick="clearSearch()" class="text-xs text-slate-400 hover:text-indigo-600"><i class="fa-solid fa-xmark"></i> Đóng</button>
+          </div>
+          <div id="search-results-list" class="max-h-80 overflow-y-auto custom-scrollbar space-y-2"></div>
+        </div>
+
+        <!-- Chapters Grid -->
+        <div class="space-y-3">
+          <h3 class="text-base font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+            <i class="fa-solid fa-layer-group text-indigo-600 dark:text-indigo-400"></i>
+            Danh Sách Các Chương Bài Học
+          </h3>
+          <div id="chapter-cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Dynamically generated chapter cards -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: Quiz / Practice Screen -->
+      <section id="view-quiz" class="hidden space-y-6 flex-1 flex flex-col">
+        
+        <!-- Top Toolbar & Settings -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700 flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <button onclick="navigateToView('dashboard')" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 flex items-center justify-center text-slate-600 dark:text-slate-300 transition" title="Quay lại">
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div>
+              <span id="quiz-chapter-title" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Chương 1</span>
+              <h3 id="quiz-header-subtitle" class="text-sm font-semibold text-slate-700 dark:text-slate-300">Luyện tập trắc nghiệm</h3>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+            <!-- Shuffle Options Switch -->
+            <button id="shuffle-toggle-btn" onclick="toggleShuffle()" class="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700/50 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 transition flex items-center gap-1.5">
+              <i class="fa-solid fa-shuffle text-indigo-500"></i>
+              <span>Xáo trộn</span>
+            </button>
+
+            <!-- Mode Selector Switch -->
+            <div id="mode-selector-group" class="bg-slate-100 dark:bg-slate-700 p-1 rounded-xl flex items-center text-xs font-medium">
+              <button id="mode-btn-practice" onclick="setQuizMode('practice')" class="px-3 py-1 rounded-lg bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm transition">Hiện đáp án</button>
+              <button id="mode-btn-exam" onclick="setQuizMode('exam')" class="px-3 py-1 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition">Làm bài test</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question Body Card & Quick Palette Container -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 flex-1">
+          
+          <!-- Left Main Card (3 Cols) -->
+          <div class="lg:col-span-3 flex flex-col space-y-4">
+            
+            <!-- Main Question Card -->
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 dark:border-slate-700 flex-1 flex flex-col justify-between transition-colors duration-200">
+              
+              <div>
+                <!-- Question Top Indicator -->
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-700">
+                  <div class="flex items-center gap-2">
+                    <span class="px-2.5 py-1 rounded-lg bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-bold text-xs">
+                      Câu <span id="current-question-num">1</span>/<span id="total-question-num">20</span>
+                    </span>
+                    <span id="question-status-pill" class="text-[11px] font-semibold text-slate-400">Chưa trả lời</span>
+                  </div>
+
+                  <button id="bookmark-btn" onclick="toggleCurrentBookmark()" class="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-amber-500 flex items-center justify-center transition" title="Lưu câu hỏi">
+                    <i class="fa-regular fa-bookmark text-base"></i>
+                  </button>
+                </div>
+
+                <!-- Question Text -->
+                <h2 id="question-text-container" class="text-base sm:text-lg font-semibold text-slate-800 dark:text-slate-100 leading-relaxed mb-6">
+                  Nội dung câu hỏi...
+                </h2>
+
+                <!-- Options List -->
+                <div id="options-container" class="space-y-3">
+                  <!-- Option items dynamically rendered -->
+                </div>
+
+                <!-- Explanation / Feedback Box (Practice Mode) -->
+                <div id="explanation-box" class="hidden mt-6 p-4 rounded-2xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/60 text-xs sm:text-sm text-indigo-900 dark:text-indigo-200 leading-relaxed space-y-2">
+                  <div class="font-bold flex items-center gap-2 text-indigo-700 dark:text-indigo-300">
+                    <i class="fa-solid fa-circle-info"></i> Giải thích & Ghi nhớ:
+                  </div>
+                  <p id="explanation-text">Nội dung giải thích đáp án đúng.</p>
+                </div>
+              </div>
+
+              <!-- Navigation Footer -->
+              <div class="mt-8 pt-4 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between gap-3">
+                <button id="prev-question-btn" onclick="navigateQuestion(-1)" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold transition flex items-center gap-2">
+                  <i class="fa-solid fa-chevron-left"></i> Câu Trước
+                </button>
+
+                <div class="flex items-center gap-2">
+                  <button id="submit-quiz-btn" onclick="submitCurrentQuiz()" class="hidden px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold transition shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-check"></i> Nộp Bài
+                  </button>
+                  <button id="next-question-btn" onclick="navigateQuestion(1)" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-semibold transition shadow-sm flex items-center gap-2">
+                    Câu Tiếp <i class="fa-solid fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right Quick Question Palette Grid (Desktop) -->
+          <div class="hidden lg:block lg:col-span-1">
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-5 shadow-sm border border-slate-200 dark:border-slate-700 sticky top-24 space-y-4">
+              <div class="flex items-center justify-between">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Sơ đồ câu hỏi</h4>
+                <span id="palette-progress" class="text-xs font-bold text-indigo-600 dark:text-indigo-400">0/20</span>
+              </div>
+
+              <div id="question-palette-grid" class="grid grid-cols-5 gap-2 max-h-80 overflow-y-auto custom-scrollbar p-1">
+                <!-- Question palette buttons -->
+              </div>
+
+              <div class="pt-2 border-t border-slate-100 dark:border-slate-700 space-y-1.5 text-[11px] text-slate-500 dark:text-slate-400">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> Câu đã đúng
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span> Câu đã sai
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-indigo-600 inline-block"></span> Đang chọn
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-slate-200 dark:bg-slate-700 inline-block"></span> Chưa làm
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- VIEW 3: Results & Statistics Screen -->
+      <section id="view-results" class="hidden space-y-6">
+        
+        <!-- Score Summary Card -->
+        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 dark:border-slate-700 text-center space-y-6">
+          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 text-3xl shadow-inner mb-2">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+
+          <div class="space-y-1">
+            <h2 class="text-2xl font-extrabold text-slate-800 dark:text-slate-100">Kết Quả Bài Làm</h2>
+            <p id="result-subtitle" class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Chúc mừng bạn đã hoàn thành bài tập!</p>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
+            <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-700">
+              <div id="result-score-number" class="text-2xl font-black text-indigo-600 dark:text-indigo-400">10/10</div>
+              <div class="text-xs text-slate-400 mt-1">Điểm số</div>
+            </div>
+            <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-700">
+              <div id="result-correct-count" class="text-2xl font-black text-emerald-600 dark:text-emerald-400">20</div>
+              <div class="text-xs text-slate-400 mt-1">Số câu đúng</div>
+            </div>
+            <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-700">
+              <div id="result-incorrect-count" class="text-2xl font-black text-rose-600 dark:text-rose-400">0</div>
+              <div class="text-xs text-slate-400 mt-1">Số câu sai</div>
+            </div>
+            <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-700">
+              <div id="result-accuracy-percent" class="text-2xl font-black text-amber-600 dark:text-amber-400">100%</div>
+              <div class="text-xs text-slate-400 mt-1">Chính xác</div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <button onclick="retryCurrentQuiz()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs sm:text-sm transition flex items-center gap-2">
+              <i class="fa-solid fa-rotate-right"></i> Làm Lại Bài Bày
+            </button>
+            <button onclick="navigateToView('dashboard')" class="px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-xs sm:text-sm transition flex items-center gap-2">
+              <i class="fa-solid fa-house"></i> Về Trang Chủ
+            </button>
+          </div>
+        </div>
+
+        <!-- Detailed Review Filter Tabs -->
+        <div class="space-y-4">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <h3 class="text-base font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+              <i class="fa-solid fa-list-check text-indigo-600"></i> Xem Chi Tiết Đáp Án
+            </h3>
+            <div class="flex gap-2">
+              <button onclick="filterReviewResults('all')" id="review-filter-all" class="px-3 py-1 rounded-lg text-xs font-semibold bg-indigo-600 text-white">Tất cả</button>
+              <button onclick="filterReviewResults('correct')" id="review-filter-correct" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">Câu đúng</button>
+              <button onclick="filterReviewResults('incorrect')" id="review-filter-incorrect" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">Câu sai</button>
+            </div>
+          </div>
+
+          <div id="review-questions-list" class="space-y-4">
+            <!-- Review items dynamically generated -->
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Mobile Question Drawer Modal -->
+  <div id="drawer-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex justify-end">
+    <div class="w-4/5 max-w-xs bg-white dark:bg-slate-800 h-full p-5 shadow-2xl flex flex-col justify-between space-y-4">
+      <div>
+        <div class="flex justify-between items-center mb-4 pb-2 border-b border-slate-100 dark:border-slate-700">
+          <h3 class="font-bold text-sm">Danh sách câu hỏi</h3>
+          <button onclick="toggleQuestionPaletteDrawer()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="drawer-palette-grid" class="grid grid-cols-5 gap-2 max-h-[70vh] overflow-y-auto custom-scrollbar p-1"></div>
+      </div>
+      <button onclick="toggleQuestionPaletteDrawer()" class="w-full py-2 bg-indigo-600 text-white text-xs font-semibold rounded-xl">Đóng</button>
+    </div>
+  </div>
+
+  <script>
+    // QUIZ DATASTORE - EXACT TEXT PRESERVED FROM SOURCE
+    const QUIZ_DATA = [
+      // ================= CHƯƠNG 1 =================
+      {
+        id: "ch1_q1",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Thuật ngữ \"Kinh tế chính trị\" được sử dụng lần đầu tiên vào năm nào?",
+        options: ["1615", "1610", "1612", "1618"],
+        correct: 0,
+        explanation: "Thuật ngữ 'Kinh tế chính trị' được nhà kinh tế học Antoine de Montchrétien đưa ra lần đầu tiên trong tác phẩm 'Chuyên luận về kinh tế chính trị' xuất bản năm 1615."
+      },
+      {
+        id: "ch1_q2",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Theo C.Mác và Ph.Ăngghen đối tượng nghiên cứu của kinh tế chính trị là?",
+        options: [
+          "Mặt kỹ thuật của sản xuất và trao đổi của các phương thức sản xuất nhất định",
+          "Các quan hệ thuộc một lĩnh vực, một khía cạnh của nền sản xuất xã hội",
+          "Mặt xã hội của các phương thức sản xuất đặt trong mối quan hệ với lực lượng sản xuất và kiến trúc thượng tầng",
+          "Các quan hệ kinh tế trong các lĩnh vực thương nghiệp, nông nghiệp, sản xuất công nghiệp"
+        ],
+        correct: 2,
+        explanation: "Theo C.Mác và Ph.Ăngghen, đối tượng nghiên cứu của kinh tế chính trị là các quan hệ sản xuất và trao đổi trong phương thức sản xuất mà các quan hệ đó hình thành và phát triển."
+      },
+      {
+        id: "ch1_q3",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Đại biểu tiêu biểu của chủ nghĩa trọng nông ở Pháp là:",
+        options: ["Dewey, Sartre", "F.Quesnay, Turgot", "Descartes, Diderot", "Camus, Bergson"],
+        correct: 1,
+        explanation: "Chủ nghĩa trọng nông Pháp xuất hiện ở thế kỷ XVIII với các đại biểu tiêu biểu xuất sắc như François Quesnay và A.R.J. Turgot."
+      },
+      {
+        id: "ch1_q4",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Quy luật kinh tế được hiểu là:",
+        options: [
+          "Sản phẩm chủ quan của con người được hình thành trên cơ sở vận dụng các chính sách kinh tế",
+          "Những mối liên hệ tất nhiên, ổn định và phát triển bền vững của các chính sách kinh tế",
+          "Những mối liên hệ bản chất, khách quan, lặp đi lặp lại của sự vật hiện tượng với nhau",
+          "Những mối liên hệ bản chất, khách quan, lặp đi lặp lại của các hiện tượng và quá trình kinh tế"
+        ],
+        correct: 3,
+        explanation: "Quy luật kinh tế là những mối liên hệ bản chất, khách quan, lặp đi lặp lại giữa các hiện tượng và quá trình kinh tế."
+      },
+      {
+        id: "ch1_q5",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "\"Dầu nhờn lợi ích cá nhân làm cho bánh xe kinh tế quay một cách kì diệu mà không cần bất kì nguyên tắc nào, thị trường sẽ giải quyết tất cả\". Đây là luận điểm của trường phái kinh tế trị nào?",
+        options: [
+          "Chủ nghĩa trọng thương",
+          "Kinh tế chính trị Tư sản cổ điển Anh",
+          "Chủ nghĩa trọng nông",
+          "Kinh tế chính trị Mác - Xít"
+        ],
+        correct: 1,
+        explanation: "Luận điểm về bàn tay gián tiếp của thị trường và động lực lợi ích cá nhân là tư tưởng cốt lõi của trường phái Kinh tế chính trị tư sản cổ điển Anh (đặc biệt là Adam Smith)."
+      },
+      {
+        id: "ch1_q6",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Phương pháp trừu tượng hoá khoa học được hiểu là:",
+        options: [
+          "Gạt bỏ những bộ phận phức tạp của đối tượng nghiên cứu, giữ lại những gì đơn giản, dễ hiểu",
+          "Gạt bỏ hiện tượng ngẫu nhiên, bên ngoài, giữ lại những mối liên hệ phổ biến bền vững, nhờ đó nắm được bản chất, quy luật",
+          "Quy nạp các hiện tượng và quá trình kinh tế vào cùng nhóm, từ đó rút ra bản chất, quy luật kinh tế",
+          "Tạm gác những hiện tượng ngẫu nhiên, bề ngoài, chỉ giữ lại những mối liên hệ phổ biến mang tính bản chất"
+        ],
+        correct: 3,
+        explanation: "Trừu tượng hóa khoa học là phương pháp gạt bỏ khỏi đối tượng nghiên cứu những cái ngẫu nhiên, bề ngoài để nắm lấy bản chất và quy luật vận động nội tại."
+      },
+      {
+        id: "ch1_q7",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Lý luận kinh tế chính trị của C.Mác và Ph.Ăngghen được thể hiện tập trung và cô đọng nhất trong tác phẩm nào dưới đây?",
+        options: ["Gia đình thần thánh", "Hệ tư tưởng Đức", "Tư bản luận", "Tuyên ngôn của Đảng cộng sản"],
+        correct: 2,
+        explanation: "Bộ 'Tư bản' (Das Kapital) là tác phẩm kinh điển vĩ đại nhất chứa đựng toàn bộ hệ thống lý luận KTCT Mác - Lênin."
+      },
+      {
+        id: "ch1_q8",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Các chức năng cơ bản của Kinh tế chính trị Mác - Lênin gồm:",
+        options: [
+          "Chức năng thế giới quan, chức năng nhân sinh quan, chức năng thực tiễn, chức năng phương pháp luận",
+          "Chức năng xã hội, chức năng giáo dục, chức năng nhận thức, chức năng tư tưởng",
+          "Chức năng giải trí, chức năng phương pháp luận, chức năng thực tiễn, chức năng giáo dục",
+          "Chức năng nhận thức, chức năng thực tiễn, chức năng tư tưởng, chức năng phương pháp luận"
+        ],
+        correct: 3,
+        explanation: "Kinh tế chính trị Mác - Lênin có 4 chức năng cốt lõi: Nhận thức, Thực tiễn, Tư tưởng và Phương pháp luận."
+      },
+      {
+        id: "ch1_q9",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Đại biểu cho trường phái kinh tế chính trị tư sản cổ điển Anh gồm:",
+        options: [
+          "R.Descartes, D.Diderot",
+          "F.Quesnay, Turgot",
+          "W.Petty, A.Smith, D.Ricardo",
+          "A.Camus, H.Bergson"
+        ],
+        correct: 2,
+        explanation: "William Petty, Adam Smith và David Ricardo là những đại biểu kiệt xuất nhất của học thuyết kinh tế tư sản cổ điển Anh."
+      },
+      {
+        id: "ch1_q10",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Mục đích chủ yếu khi nghiên cứu kinh tế chính trị Mác - Lênin là gì?",
+        options: [
+          "Khám phá các quy luật kinh tế chi phối các quan hệ xã hội của sản xuất và trao đổi và vận dụng chúng vào thực tiễn",
+          "Nhằm xây dựng xã hội công bằng, dân chủ, văn minh",
+          "Nhằm xây dựng và hoàn thiện nhà nước pháp quyền xã hội chủ nghĩa",
+          "Nhằm xây dựng nền văn hoá Việt Nam tiên tiến đậm đà bản sắc dân tộc"
+        ],
+        correct: 0,
+        explanation: "Mục đích nghiên cứu hàng đầu là nhằm tìm ra các quy luật kinh tế khách quan vận động trong xã hội để vận dụng hiệu quả vào thực tiễn."
+      },
+      {
+        id: "ch1_q11",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Mối quan hệ giữa chính sách kinh tế và quy luật kinh tế?",
+        options: [
+          "Chính sách kinh tế là sự phản ánh chủ quan trên cơ sở nhận thức, vận dụng quy luật kinh tế trong điều kiện cụ thể",
+          "Chính sách có thể thay thế và xoá bỏ quy luật kinh tế nếu được ban hành kịp thời",
+          "Quy luật kinh tế chỉ tồn tại trong kinh tế thị trường, còn kinh tế kế hoạch chỉ có chính sách kinh tế",
+          "Trong những tình huống cấp bách chính sách kinh tế sẽ triệt tiêu quy luật kinh tế"
+        ],
+        correct: 0,
+        explanation: "Quy luật kinh tế tồn tại khách quan, còn chính sách kinh tế là sản phẩm chủ quan của con người được đặt ra dựa trên việc nhận thức quy luật đó."
+      },
+      {
+        id: "ch1_q12",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Thuật ngữ khoa học “Kinh tế chính trị” xuất hiện lần đầu tiên trong tác phẩm nào dưới đây?",
+        options: [
+          "Tư bản (C.Mác)",
+          "Tình cảnh giai cấp công nhân Anh (Ph.Ăngghen)",
+          "Sự trỗi dậy và suy tàn của đế chế thứ ba (William L.Shirer)",
+          "Chuyên luận về kinh tế chính trị (A.Montchretien)"
+        ],
+        correct: 3,
+        explanation: "Xuất hiện trong cuốn 'Traité d'économie politique' (Chuyên luận về kinh tế chính trị) xuất bản năm 1615."
+      },
+      {
+        id: "ch1_q13",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Người được mệnh danh là nhà kinh tế thời kỳ công trường thủ công?",
+        options: ["R.T.Mathus", "W.Petty", "D.Ricardo", "A.Smith"],
+        correct: 3,
+        explanation: "Adam Smith được coi là nhà kinh tế đại biểu tiêu biểu nhất cho giai đoạn công trường thủ công."
+      },
+      {
+        id: "ch1_q14",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Người đầu tiên đưa ra thuật ngữ “kinh tế chính trị”?",
+        options: ["Antoine de Montchretien", "Thomas Mun", "William Petty", "Francois Quesney"],
+        correct: 0,
+        explanation: "Antoine de Montchrétien là nhà kinh tế học người Pháp đầu tiên đưa ra thuật ngữ này."
+      },
+      {
+        id: "ch1_q15",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "“Lí luận khoa học chỉ trở thành lực lượng vật chất nếu nó được thâm nhập vào quần chúng”. Luận điểm này nhấn mạnh chức năng nào sau đây?",
+        options: ["Chức năng thực tiễn", "Chức năng phương pháp luận", "Chức năng tư tưởng", "Chức năng nhận thức"],
+        correct: 0,
+        explanation: "Khi lý luận đi vào quần chúng và cải tạo thực tế đời sống xã hội thì đó chính là biểu hiện nổi bật của chức năng thực tiễn."
+      },
+      {
+        id: "ch1_q16",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Chọn luận điểm đúng nhất trong các nhận định sau đây:",
+        options: [
+          "Chủ nghĩa trọng thương bắt đầu từ thời kỳ Cổ đại đến cuối thế kỷ XV",
+          "Chủ nghĩa trọng thương coi trọng vai trò của hoạt động thương mại",
+          "Chủ nghĩa trọng thương nhấn mạnh vai trò của sản xuất nông nghiệp",
+          "Chủ nghĩa trọng thương coi trọng vai trò của hoạt động hàng hải"
+        ],
+        correct: 1,
+        explanation: "Chủ nghĩa trọng thương coi hoạt động lưu thông hàng hóa, thương mại (đặc biệt là ngoại thương) là nguồn gốc duy nhất tạo ra sự giàu có."
+      },
+      {
+        id: "ch1_q17",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Kinh tế chính trị Mác - Lênin đã kế thừa và phát triển trực tiếp những thành tựu của:",
+        options: ["Chủ nghĩa trọng thương", "Học thuyết công lợi", "Kinh tế chính trị cổ điển Anh", "Chủ nghĩa trọng nông"],
+        correct: 2,
+        explanation: "Kinh tế chính trị cổ điển Anh chính là một trong ba nguồn gốc lý luận trực tiếp cấu thành nên chủ nghĩa Mác."
+      },
+      {
+        id: "ch1_q18",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Chọn luận điểm đúng về kinh tế chính trị Mác - Lênin:",
+        options: [
+          "Một trong ba học thuyết quan trọng của chủ nghĩa Mác - Lênin",
+          "Một trong ba nguồn gốc của chủ nghĩa Mác - Lênin",
+          "Một trong ba bộ phận cấu thành của chủ nghĩa Mác - Lênin",
+          "Một trong ba tiền đề hình thành chủ nghĩa Mác - Lênin"
+        ],
+        correct: 2,
+        explanation: "Chủ nghĩa Mác - Lênin gồm 3 bộ phận cấu thành: Triết học Mác - Lênin, Kinh tế chính trị Mác - Lênin và Chủ nghĩa xã hội khoa học."
+      },
+      {
+        id: "ch1_q19",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "Hãy chọn phương án đúng nhất về đặc điểm của quy luật kinh tế:",
+        options: [
+          "Mang tính cụ thể, tính tương đối và tuyệt đối",
+          "Mang tính khách quan và phát huy tác dụng thông qua hoạt động kinh tế của con người",
+          "Mang tính chủ quan, hoàn toàn phụ thuộc vào ý thức của những người làm kinh tế",
+          "Mang tính tuyệt đối, tính phổ biến và toàn diện"
+        ],
+        correct: 1,
+        explanation: "Quy luật kinh tế tồn tại khách quan nhưng để phát huy tác dụng thì phải thông qua hoạt động sản xuất kinh doanh trực tiếp của con người."
+      },
+      {
+        id: "ch1_q20",
+        chapterId: "chuong1",
+        chapterName: "Chương 1",
+        question: "“Thương mại là hòn đá thử vàng đối với sự giàu có của mọi quốc gia, không có phép lạ nào khác kiếm tiền trừ thương mại”. Đây là luận điểm của nhà kinh tế học nào?",
+        options: ["Thomas Mun", "William Petty", "Các - Mác", "David Ricardo"],
+        correct: 0,
+        explanation: "Thomas Mun là nhà kinh tế học nổi tiếng theo trường phái chủ nghĩa trọng thương Anh."
+      },
+
+      // ================= CHƯƠNG 2 =================
+      {
+        id: "ch2_q1",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Mệnh đề nào không thuộc nội dung của quy luật giá trị?",
+        options: [
+          "Sản xuất hàng hóa phải dựa trên cơ sở hao phí lao động xã hội cần thiết",
+          "Sự vận động của quy luật giá trị thông qua sự vận động của giá cả hàng hóa",
+          "Tác động đến luồng vận chuyển của hàng hóa từ nơi giá thấp đến nơi giá cao",
+          "Trao đổi hàng hóa phải dựa trên cơ sở ngang giá"
+        ],
+        correct: 2,
+        explanation: "Phương án 'Tác động đến luồng vận chuyển...' thuộc về TÁC DỤNG/TÁC ĐỘNG điều tiết của quy luật giá trị, chứ không thuộc bản thân NỘI DUNG quy tắc sản xuất và trao đổi."
+      },
+      {
+        id: "ch2_q2",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Chọn mệnh đề KHÔNG đúng về tăng cường độ lao động",
+        options: [
+          "Lao động khẩn trương hơn",
+          "Rút ngắn thời gian lao động cần thiết",
+          "Thời gian lao động được phân bổ hợp lý hơn",
+          "Lao động nặng nhọc hơn"
+        ],
+        correct: 1,
+        explanation: "Rút ngắn thời gian lao động cần thiết là kết quả đặc trưng của tăng NĂNG SUẤT lao động, không phải tăng cường độ lao động."
+      },
+      {
+        id: "ch2_q3",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "\"Khi tăng năng suất lao động (điều kiện cường độ lao động không đổi) thì tổng sản phẩm tăng lên, nhưng tổng lượng lao động hao phí ..... nên giá trị một đơn vị hàng hoá ......\"",
+        options: ["tăng/ giảm", "tăng tương ứng/ không đổi", "giảm tương ứng/ tăng", "không đổi/ giảm"],
+        correct: 3,
+        explanation: "Khi tăng năng suất lao động, tổng hao phí trong một đơn vị thời gian không đổi nhưng số lượng sản phẩm tăng lên, khiến lượng hao phí để tạo ra 1 sản phẩm giảm xuống."
+      },
+      {
+        id: "ch2_q4",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Mệnh đề nào sau đây không thể hiện bản chất của tiền tệ",
+        options: [
+          "Tiền tệ là hàng hoá đặc biệt, đóng vai trò là vật ngang giá chung",
+          "Tiền tệ là hình thái của giá trị hàng hoá",
+          "Tiền tệ biểu hiện lao động xã hội và quan hệ kinh tế giữa các chủ thể",
+          "Tiền là thước đo giá trị hàng hoá"
+        ],
+        correct: 3,
+        explanation: "'Thước đo giá trị' là một trong các chức năng của tiền tệ, không khái quát toàn bộ bản chất kinh tế của tiền tệ."
+      },
+      {
+        id: "ch2_q5",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Trong mối quan hệ giữa giá cả và giá trị của hàng hóa thì:",
+        options: [
+          "Giá cả là cơ sở của giá trị",
+          "Giá cả không tác động gì đến giá trị",
+          "Giá trị xoay xung quanh trục giá cả",
+          "Giá trị là cơ sở của giá cả"
+        ],
+        correct: 3,
+        explanation: "Giá trị là cơ sở nội tại của giá cả; còn giá cả chính là biểu hiện bằng tiền của giá trị."
+      },
+      {
+        id: "ch2_q6",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Mệnh đề nào sau đây không phải là tác động của quy luật giá trị?",
+        options: [
+          "Điều tiết sản xuất và lưu thông hàng hóa",
+          "Thực hiện chọn lọc tự nhiên và phân hóa giàu nghèo",
+          "Giảm bớt chênh lệch về mức sống giữa các tầng lớp dân cư",
+          "Cải tiến kỹ thuật, hợp lý hóa sản xuất, tăng năng suất lao động, thúc đẩy LLSX phát triển"
+        ],
+        correct: 2,
+        explanation: "Quy luật giá trị làm phân hóa những người sản xuất hàng hóa (dẫn đến giàu - nghèo), làm tăng chênh lệch chứ không giảm chênh lệch."
+      },
+      {
+        id: "ch2_q7",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Yếu tố nào được xác định là thực thể của giá trị hàng hóa?",
+        options: ["Lao động trừu trượng", "Lao động phức tạp", "Lao động giản đơn", "Lao động cụ thể"],
+        correct: 0,
+        explanation: "Thực thể giá trị của hàng hóa chính là lao động trừu tượng của người sản xuất kết tinh trong hàng hóa đó."
+      },
+      {
+        id: "ch2_q8",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Người phát hiện ra tính chất hai mặt của lao động sản xuất hàng hóa?",
+        options: ["C.Mác", "A.Smith", "Ph.Ăngghen", "D.Ricardo"],
+        correct: 0,
+        explanation: "C.Mác là người đầu tiên phát hiện ra tính chất hai mặt: Lao động cụ thể và Lao động trừu tượng."
+      },
+      {
+        id: "ch2_q9",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Hãy điền vào chỗ trống sau để hoàn thành luận điểm của C.Mác: \"Chỉ có........... của những người lao động tư nhân độc lập và không phụ thuộc vào nhau mới đối diện với nhau như là những..........\"",
+        options: ["lợi ích/ tặng phẩm", "sản phẩm/ hàng hoá", "hàng hoá/vật phẩm", "vật thể/sản phẩm"],
+        correct: 1,
+        explanation: "Nguyên văn phát biểu của Mác: 'Chỉ có sản phẩm của những người lao động tư nhân độc lập... mới đối diện với nhau như là những hàng hoá'."
+      },
+      {
+        id: "ch2_q10",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Chọn mệnh đề không đúng về cơ cấu lượng giá trị hàng hoá",
+        options: [
+          "bao gồm lao động quá khứ (c) và lao động hiện tại (v+m)",
+          "bao gồm lao động quá khứ và lao động sống",
+          "chỉ bao gồm giá trị của tư liệu sản xuất và giá trị sức lao động",
+          "được kí hiệu là G = c + v + m"
+        ],
+        correct: 2,
+        explanation: "Cấu trúc G = c + v + m, trong đó v là giá trị sức lao động và m là giá trị thặng dư. Phát biểu 'chỉ bao gồm c và v' là bỏ sót m."
+      },
+      {
+        id: "ch2_q11",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Mệnh đề nào sau đây không phải bản chất của tiền tệ?",
+        options: [
+          "Tiền là hàng hóa đặc biệt được tách ra trong thế giới hàng hóa làm vật ngang giá chung",
+          "Tiền là thước đo giá trị hàng hóa",
+          "Tiền thể hiện lao động xã hội và quan hệ giữa những người sản xuất hàng hóa.",
+          "Tiền là hình thái biểu hiện cao nhất của giá trị hàng hóa"
+        ],
+        correct: 1,
+        explanation: "Thước đo giá trị là một chức năng cụ thể của tiền tệ."
+      },
+      {
+        id: "ch2_q12",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Chọn phương án sai về giá trị sử dụng của hàng hóa?",
+        options: [
+          "Là nội dung vật chất của của cải không kể hình thức xã hội của nó như thế nào",
+          "Là hao phí lao động xã hội cần thiết để sản xuất ra hàng hóa",
+          "Là tính chất có ích, công dụng của vật thể đó có thể thỏa mãn một nhu cầu nào đó của người mua",
+          "Là giá trị sử dụng cho người mua, cho xã hội"
+        ],
+        correct: 1,
+        explanation: "Hao phí lao động xã hội cần thiết để sản xuất ra hàng hóa cấu thành nên GIÁ TRỊ của hàng hóa, chứ không phải giá trị sử dụng."
+      },
+      {
+        id: "ch2_q13",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Đâu không phải ưu thế của sản xuất hàng hóa?",
+        options: [
+          "Thúc đẩy giao lưu kinh tế giữa các quốc gia",
+          "Cạnh tranh là động lực thúc đẩy lực lượng sản xuất phát triển",
+          "Gia tăng không hạn chế của thị trường là động lực mạnh mẽ thúc đẩy sản xuất phát triển",
+          "Phân hóa giàu - nghèo"
+        ],
+        correct: 3,
+        explanation: "Phân hóa giàu nghèo là khuyết tật / mặt trái của sản xuất hàng hóa, không phải ưu thế."
+      },
+      {
+        id: "ch2_q14",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Chọn luận điểm KHÔNG đúng về lao động phức tạp?",
+        options: [
+          "Cùng một thời gian, lao động phức tạp tạo ra nhiều giá trị hơn lao động giản đơn",
+          "Lao động phức tạp là lao động trải qua đào tạo, huấn luyện",
+          "Lao động phức tạp là lao động trong môi trường đặc biệt",
+          "Lao động phức tạp là lao động giản đơn nhân bội lên"
+        ],
+        correct: 2,
+        explanation: "Lao động phức tạp được định nghĩa là lao động đòi hỏi phải qua đào tạo, huấn luyện chuyên môn chứ không phải đơn thuần là môi trường làm việc."
+      },
+      {
+        id: "ch2_q15",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Điều kiện khách quan ra đời và tồn tại của sản xuất hàng hoá là:",
+        options: [
+          "Tuyên bố của chính phủ về thể chế kinh tế.",
+          "Phân công lao động xã hội và chế độ tư hữu về tư liệu sản xuất",
+          "Phân công lao động xã hội và tách biệt về mặt kinh tế giữa các chủ thể sản xuất",
+          "Trình độ phát triển của nền sản xuất xã hội."
+        ],
+        correct: 2,
+        explanation: "Hai điều kiện ra đời của sản xuất hàng hóa là: Phân công lao động xã hội và Sự tách biệt tương đối về mặt kinh tế giữa các chủ thể sản xuất."
+      },
+      {
+        id: "ch2_q16",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Thước đo lượng giá trị của hàng hóa được tính bằng yếu tố nào?",
+        options: [
+          "Thời gian lao động cá biệt của người sản xuất",
+          "Thời gian lao động của người có cường độ lao động trung bình trong xã hội",
+          "Thời gian lao động xã hội cần thiết để sản xuất ra hàng hóa",
+          "Thời gian lao động của người có năng suất lao động trung bình trong xã hội"
+        ],
+        correct: 2,
+        explanation: "Thước đo lượng giá trị hàng hóa không đo bằng thời gian cá biệt mà đo bằng Thời gian lao động xã hội cần thiết."
+      },
+      {
+        id: "ch2_q17",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Về mối quan hệ giữa hai mặt lao động sản xuất hàng hoá với 2 thuộc tính của hàng hoá?",
+        options: [
+          "Lao động cụ thể quyết định giá trị, lao động trừu tượng quyết định giá trị trao đổi",
+          "Lao động cụ thể quyết định giá trị sử dụng, lao động trừu tượng quyết định công dụng vật phẩm",
+          "Lao động cụ thể quyết định giá trị, lao động trừu tượng quyết định giá trị sử dụng",
+          "Lao động cụ thể quyết định giá trị sử dụng, lao động trừu tượng quyết định giá trị"
+        ],
+        correct: 3,
+        explanation: "Lao động cụ thể tạo ra giá trị sử dụng; lao động trừu tượng tạo ra giá trị của hàng hóa."
+      },
+      {
+        id: "ch2_q18",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Tiền tệ làm phương tiện lưu thông được hiểu như thế nào?",
+        options: [
+          "Tiền là môi giới trong quá trình trao đổi hàng hóa",
+          "Tiền dùng để trả khoản mua chịu hàng hóa",
+          "Tiền là thước đo giá trị của hàng hóa",
+          "Tiền dùng để trả nợ, nộp thuế"
+        ],
+        correct: 0,
+        explanation: "Chức năng phương tiện lưu thông nghĩa là tiền đóng vai trò vật môi giới trung gian trong trao đổi mua bán (H - T - H)."
+      },
+      {
+        id: "ch2_q19",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Nhân tố nào sau đây không ảnh hưởng đến giá cả hàng hóa?",
+        options: [
+          "Kim loại dùng làm tiền tệ",
+          "Quan hệ cung cầu về hàng hóa trên thị trường",
+          "Giá trị hàng hóa",
+          "Sức mua của tiền, tình trạng độc quyền"
+        ],
+        correct: 0,
+        explanation: "Thực chất sức mua của tiền, giá trị hàng hóa, cung cầu và độc quyền ảnh hưởng trực tiếp đến giá cả thị trường."
+      },
+      {
+        id: "ch2_q20",
+        chapterId: "chuong2",
+        chapterName: "Chương 2",
+        question: "Giá trị hàng hóa được tạo ra từ đâu?",
+        options: ["Từ phân phối hàng hóa", "Từ trao tặng hàng hóa", "Từ sản xuất hàng hóa", "Từ hưởng thụ vật phẩm"],
+        correct: 2,
+        explanation: "Giá trị hàng hóa được tạo ra duy nhất trong quá trình sản xuất hàng hóa bởi hao phí lao động của người sản xuất."
+      },
+
+      // ================= CHƯƠNG 3 =================
+      {
+        id: "ch3_q1",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Điền vào chỗ trống để hoàn thành luận điểm của Các Mác, \"giá trị thặng dư là ... giá trị mới dôi ra ngoài giá trị sức lao động do ... tạo ra, là kết quả của lao động không công của công nhân cho nhà tư bản\"",
+        options: [
+          "a. toàn bộ/ tư bản",
+          "b. tư bản/ công nhân",
+          "c. bộ phận/ sinh viên",
+          "d. bộ phận/ công nhân"
+        ],
+        correct: 3,
+        explanation: "Giá trị thặng dư là bộ phận giá trị mới dôi ra ngoài giá trị sức lao động do công nhân tạo ra."
+      },
+      {
+        id: "ch3_q2",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Trong điều kiện cạnh tranh tự do, giá cả sản xuất được xác định như sau:",
+        options: [
+          "a. Tổng chi phí sản xuất cộng với giá trị thặng dư",
+          "b. Tổng chi phí sản xuất cộng với lợi nhuận",
+          "c. Tổng chi phí sản xuất cộng với lợi nhuận bình quân",
+          "d. Tổng chi phí sản xuất cộng với lợi nhuận siêu ngạch"
+        ],
+        correct: 2,
+        explanation: "Giá cả sản xuất = k + p̄ (Chi phí sản xuất + Lợi nhuận bình quân)."
+      },
+      {
+        id: "ch3_q3",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Nhân tố nào sau đây không làm tăng quy mô tích lũy tư bản?",
+        options: [
+          "a. Nâng cao năng suất lao động",
+          "b. Sử dụng hiệu quả máy móc",
+          "c. Nâng cao giá trị sức lao động",
+          "d. Nâng cao tỷ suất giá trị thặng dư"
+        ],
+        correct: 2,
+        explanation: "Nâng cao giá trị sức lao động làm tăng phần chi phí v, khiến lượng giá trị thặng dư m giảm xuống, làm giảm quy mô tích lũy."
+      },
+      {
+        id: "ch3_q4",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Các hình thức biểu hiện của giá trị thặng dư trong nền kinh tế thị trường tư bản chủ nghĩa, giai đoạn tự do cạnh tranh là?",
+        options: [
+          "a. lợi nhuận, tỷ suất lợi nhuận, lợi tức trái phiếu và lợi tức cho vay",
+          "b. lợi nhuận, lợi nhuận thương nghiệp, lợi tức cho vay",
+          "c. lợi nhuận công nghiệp, lợi nhuận thương nghiệp, lợi tức cho vay và địa tô",
+          "d. lợi nhuận, tỷ suất lợi nhuận, lợi nhuận ngân hàng và cổ tức"
+        ],
+        correct: 2,
+        explanation: "Trong tự do cạnh tranh, m biến tướng thành: Lợi nhuận công nghiệp, Lợi nhuận thương nghiệp, Lợi tức cho vay và Địa tô TBCN."
+      },
+      {
+        id: "ch3_q5",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Tốc độ chu chuyển của tư bản được hiểu là:",
+        options: [
+          "a. Là số lần chu chuyển của tư bản khả biến",
+          "b. Là số lần chu chuyển của tư bản bất biến",
+          "c. Là số lần chu chuyển tư bản trong một năm",
+          "d. Là số lần chu chuyển của tư bản ứng trước"
+        ],
+        correct: 2,
+        explanation: "Tốc độ chu chuyển tư bản đo bằng số vòng/số lần chu chuyển mà tư bản thực hiện được trong thời gian 1 năm."
+      },
+      {
+        id: "ch3_q6",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Điều kiện để sức lao động trở thành hàng hoá là?",
+        options: [
+          "a. Người lao động được tự do về thân thể và không muốn khởi nghiệp",
+          "b. Người lao động được tự do và nhà tư bản mở xí nghiệp",
+          "c. Người lao động được tự do về thân thể và không có tư liệu sản xuất.",
+          "d. Nô lệ được giải phóng khỏi chủ nô"
+        ],
+        correct: 2,
+        explanation: "2 điều kiện: Người lao động tự do về thân thể và người lao động bị tước đoạt hết TLSX."
+      },
+      {
+        id: "ch3_q7",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Căn cứ vào đâu để phân chia thành tái sản xuất cá biệt và tái sản xuất xã hội?",
+        options: [
+          "a. Căn cứ vào phạm vi sản xuất",
+          "b. Căn cứ vào tính chất sản xuất",
+          "c. Căn cứ vào tốc độ sản xuất",
+          "d. Căn cứ vào nội dung sản xuất"
+        ],
+        correct: 0,
+        explanation: "Phân chia dựa theo phạm vi quy mô hoạt động: trong 1 doanh nghiệp/đơn vị là cá biệt, trên toàn bộ nền kinh tế là xã hội."
+      },
+      {
+        id: "ch3_q8",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Tỷ suất giá trị thặng dư là gì?",
+        options: [
+          "a. Là tỷ lệ phần trăm giữa giá trị thặng dư và tư bản bất biến",
+          "b. Là tỷ lệ phần trăm giữa giá trị thặng dư và tư bản ứng trước",
+          "c. Là tỷ lệ phần trăm giữa giá trị thặng dư và tư bản khả biến",
+          "d. Là tỷ lệ phần trăm giữa giá thặng dư và tư bản lưu động"
+        ],
+        correct: 2,
+        explanation: "Tỷ suất m' = (m / v) * 100%."
+      },
+      {
+        id: "ch3_q9",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Chọn luận điểm đúng về nguồn gốc của tư bản thương nghiệp trong nền kinh tế thị trường Tư bản chủ nghĩa.",
+        options: [
+          "a. kết quả của việc chiếm đoạt, mua bán bất bình đẳng với các nước thuộc địa",
+          "b. là phần m do lao động làm thuê tạo ra trong sản xuất, được tư bản công nghiệp nhượng lại cho tư bản thương nghiệp.",
+          "c. do việc thương nhân mua hàng hoá giá rẻ sau đó bán cho người tiêu dùng giá cao hơn (bán đắt)",
+          "d. là phần chênh lệch giữa giá bán hàng hoá và chi phí để sản xuất ra hàng hoá đó."
+        ],
+        correct: 1,
+        explanation: "Lợi nhuận thương nghiệp thực chất là một phần m tạo ra trong sản xuất mà tư bản công nghiệp nhượng lại cho tư bản thương nghiệp vì đã đảm nhận khâu lưu thông."
+      },
+      {
+        id: "ch3_q10",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Sự giống nhau giữa tích tụ tư bản và tập trung tư bản là:",
+        options: [
+          "a. Đều làm tăng quy mô tư bản cá biệt",
+          "b. Vừa tăng quy mô tư bản cá biệt vừa tăng quy mô tư bản xã hội.",
+          "c. Đều là tăng quy mô tư bản xã hội.",
+          "d. Có nguồn gốc trực tiếp giống nhau"
+        ],
+        correct: 0,
+        explanation: "Cả tích tụ tư bản và tập trung tư bản đều làm gia tăng quy mô của tư bản cá biệt."
+      },
+      {
+        id: "ch3_q11",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Trong các luận điểm dưới đây, luận điểm nào không đúng?",
+        options: [
+          "a. Mục đích phân chia tư bản thành tư bản bất biến và tư bản khả biến là để biết nguồn gốc giá trị thặng dư",
+          "b. Căn cứ để phân chia tư bản cố định và tư bản lưu động là phương thức dịch chuyển giá trị của chúng sang sản phẩm",
+          "c. Tư bản bất biến là điều kiện, tư bản khả biến là nguồn gốc tạo ra giá trị thặng dư",
+          "d. Tư bản cố định chính là tư bản bất biến, tư bản lưu động chính là tư bản khả biến"
+        ],
+        correct: 3,
+        explanation: "Đồng nhất tư bản cố định với tư bản bất biến, tư bản lưu động với khả biến là sai, vì tư bản lưu động bao gồm cả tư bản khả biến và nguyên nhiên vật liệu (thuộc c)."
+      },
+      {
+        id: "ch3_q12",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Đặc điểm nào dưới đây thuộc phạm trù giá trị thặng dư tuyệt đối?",
+        options: [
+          "a. Sử dụng kỹ thuật tiên tiến, cải tiến tổ chức quản lý",
+          "b. Tăng năng suất lao động cá biệt làm cho giá trị cá biệt thấp hơn giá trị thị trường",
+          "c. Rút ngắn thời gian lao động tất yếu",
+          "d. Kéo dài ngày lao động còn thời gian lao động tất yếu không đổi"
+        ],
+        correct: 3,
+        explanation: "Giá trị thặng dư tuyệt đối thu được nhờ kéo dài ngày lao động vượt quá thời gian lao động tất yếu."
+      },
+      {
+        id: "ch3_q13",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Hoàn thành luận điểm sau: \"Chi phí sản xuất tư bản chủ nghĩa là phần giá trị hàng hóa, bù lại giá cả của những ... đã tiêu dùng và giá cả của... đã sử dụng để sản xuất ra hàng hóa ấy\"",
+        options: [
+          "a. tư liệu sinh hoạt/sức lao động",
+          "b. tư liệu sản xuất/chi phí sản xuất",
+          "c. tư liệu sản xuất/sức lao động",
+          "d. tư liệu sản xuất/nguyên liệu"
+        ],
+        correct: 2,
+        explanation: "Chi phí sản xuất k = c + v (gồm giá cả tư liệu sản xuất c đã tiêu dùng và giá cả sức lao động v)."
+      },
+      {
+        id: "ch3_q14",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Căn cứ vào phương thức chuyển giá trị của từng bộ phận tư bản, tư bản sản xuất gồm:",
+        options: [
+          "a. Tư bản bất biến và tư bản ứng trước",
+          "b. Tư bản cố định và tư bản lưu động",
+          "c. Tư bản cho vay và tư bản hàng hóa",
+          "d. Tư bản tiền tệ và tư bản lưu thông"
+        ],
+        correct: 1,
+        explanation: "Căn cứ theo phương thức chuyển dịch giá trị sang sản phẩm mới, tư bản sản xuất chia thành Tư bản cố định và Tư bản lưu động."
+      },
+      {
+        id: "ch3_q15",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Bộ phận tư bản tồn tại dưới hình thái sức lao động, nguyên nhiên vật liệu, vật liệu phụ, giá trị của nó được chuyển một lần, toàn phần vào giá trị sản phẩm khi kết thúc từng quá trình sản xuất gọi là:",
+        options: ["a. Tư bản cố định", "b. Tư bản bất biến", "c. Tư bản lưu động", "d. Tư bản khả biến"],
+        correct: 2,
+        explanation: "Đó chính là định nghĩa về tư bản lưu động."
+      },
+      {
+        id: "ch3_q16",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Địa tô chênh lệch II là gì?",
+        options: [
+          "a. Địa tô thu được trên đất do vị trí đất gần nơi tiêu thụ mà có",
+          "b. Địa tô thu được trên đất có điều kiện tự nhiên thuận lợi đem lại",
+          "c. Địa tô thu được trên đất có điều kiện giao thông mang lại",
+          "d. Địa tô thu được trên đất do thâm canh tăng năng suất mà có"
+        ],
+        correct: 3,
+        explanation: "Địa tô chênh lệch II là địa tô thu được do đầu tư thâm canh, cải tiến kỹ thuật làm tăng năng suất trên cùng một diện tích đất."
+      },
+      {
+        id: "ch3_q17",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Địa tô tư bản chủ nghĩa phản ánh mối quan hệ nào sau đây?",
+        options: [
+          "a. Giữa các nhà tư bản kinh doanh nông nghiệp với nhau",
+          "b. Giữa nhà tư bản và công nhân nông nghiệp",
+          "c. Địa chủ, nhà tư bản đầu tư và công nhân nông nghiệp",
+          "d. Địa chủ và công nhân nông nghiệp"
+        ],
+        correct: 2,
+        explanation: "Địa tô TBCN thể hiện mối quan hệ giữa 3 giai cấp: Địa chủ (chủ đất), Nhà tư bản nông nghiệp và Công nhân nông nghiệp."
+      },
+      {
+        id: "ch3_q18",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Chọn phương án đúng:",
+        options: [
+          "a. Lợi nhuận là phần thưởng xứng đáng cho người ưa mạo hiểm",
+          "b. Lợi nhuận và giá trị thặng dư luôn bằng nhau",
+          "c. Lợi nhuận có nguồn gốc từ máy móc, nguyên vật liệu",
+          "d. Lợi nhuận là hình thái biểu hiện của giá trị thặng dư trong kinh tế thị trường"
+        ],
+        correct: 3,
+        explanation: "Lợi nhuận (p) chính là hình thái chuyển hóa bề ngoài của giá trị thặng dư (m) khi so sánh với toàn bộ tư bản ứng trước."
+      },
+      {
+        id: "ch3_q19",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Theo lí luận kinh tế của Mác, việc phân chia tư bản thành tư bản bất biến và tư bản khả biến nhằm:",
+        options: [
+          "a. Làm rõ nguồn gốc tạo ra giá trị thặng dư",
+          "b. Để tăng cường việc quản trị chi phí sản xuất",
+          "c. Tìm hiểu quá trình chuyển hoá giá trị vào trong từng loại sản phẩm",
+          "d. Xác định vai trò của lao động quá khứ và lao động sống"
+        ],
+        correct: 0,
+        explanation: "Ý nghĩa lý luận của việc phân chia c và v là để vạch rõ bộ phận tư bản khả biến (v) mới chính là nguồn gốc duy nhất sinh ra giá trị thặng dư (m)."
+      },
+      {
+        id: "ch3_q20",
+        chapterId: "chuong3",
+        chapterName: "Chương 3",
+        question: "Hãy chọn mệnh đề đúng nhất về vai trò tư bản bất biến trong việc tạo ra giá trị thặng dư.",
+        options: [
+          "a. Tư bản bất biến và sức lao động đều tạo ra giá trị thặng dư",
+          "b. Tư bản bất biến là nguồn gốc của giá trị thặng dư",
+          "c. Tư bản bất biến là tiền đề vật chất cho việc tạo ra giá trị thặng dư",
+          "d. Tư bản bất biến là yếu tố quyết định để tạo ra giá trị thặng dư"
+        ],
+        correct: 2,
+        explanation: "Tư bản bất biến (c) không tạo ra m nhưng là điều kiện, tiền đề vật chất không thể thiếu để quá trình sản xuất giá trị thặng dư diễn ra."
+      },
+
+      // ================= CHƯƠNG 4 =================
+      {
+        id: "ch4_q1",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Chọn luận điểm không đúng về độc quyền nhà nước trong chủ nghĩa tư bản?",
+        options: [
+          "a. Phục vụ lợi ích của độc quyền tư nhân và địa vị thống trị của chủ nghĩa tư bản",
+          "b. Độc quyền Nhà nước trong CNTB là hình thức vận động mới của quan hệ sản xuất TBCN",
+          "c. Độc quyền Nhà nước trong CNTB là giai đoạn phát triển đặc biệt của chủ nghĩa tư bản.",
+          "d. Nhà nước tư sản trở thành tập thể tư bản khổng lồ."
+        ],
+        correct: 2,
+        explanation: "Chủ nghĩa tư bản độc quyền nhà nước không phải là một giai đoạn phát triển hay chế độ KT-XH riêng biệt độc lập mà là nấc thang phát triển mới của CNTB độc quyền."
+      },
+      {
+        id: "ch4_q2",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Về kinh tế, xuất khẩu tư bản nhà nước thường hướng vào:",
+        options: [
+          "a. Những ngành thuộc kết cấu hạ tầng",
+          "b. Những ngành có công nghệ tiên tiến, hiện đại",
+          "c. Những ngành nhanh thu được lợi nhuận",
+          "d. Những ngành có tốc độ chu chuyển vốn nhanh"
+        ],
+        correct: 0,
+        explanation: "Xuất khẩu tư bản nhà nước thường tập trung vào xây dựng kết cấu hạ tầng kỹ thuật để tạo môi trường thuận lợi cho xuất khẩu tư bản tư nhân."
+      },
+      {
+        id: "ch4_q3",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Chọn phương án không đúng về quan hệ cạnh tranh trong trạng thái độc quyền?",
+        options: [
+          "a. Cạnh tranh giữa các tổ chức độc quyền với các doanh nghiệp ngoài độc quyền",
+          "b. Cạnh tranh trong nội bộ của tổ chức độc quyền",
+          "c. Trong giai đoạn độc quyền của chủ nghĩa tư bản cạnh tranh bị thủ tiêu",
+          "d. Cạnh tranh giữa các tổ chức độc quyền với nhau"
+        ],
+        correct: 2,
+        explanation: "Độc quyền sinh ra từ cạnh tranh tự do nhưng không thủ tiêu cạnh tranh, trái lại làm cho cạnh tranh trở nên vô cùng gay gắt và phức tạp hơn."
+      },
+      {
+        id: "ch4_q4",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Vì sao trong chủ nghĩa tư bản độc quyền cạnh tranh không bị thủ tiêu?",
+        options: [
+          "a. Xã hội không thừa nhận các tổ chức độc quyền",
+          "b. Vì cạnh tranh là quy luật khách quan của kinh tế hàng hóa",
+          "c. Các nhà tư bản trong tổ chức độc quyền chưa thỏa hiệp nhau",
+          "d. Cạnh tranh là một thông lệ trong chủ nghĩa tư bản"
+        ],
+        correct: 1,
+        explanation: "Cạnh tranh là quy luật kinh tế khách quan gắn liền với nền kinh tế hàng hóa nên không thể bị tiêu diệt hoàn toàn."
+      },
+      {
+        id: "ch4_q5",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Cạnh tranh giữa các ngành xảy ra khi có sự khác nhau về?",
+        options: ["a. Cung và cầu các loại hàng hóa", "b. Giá trị thặng dư siêu ngạch", "c. Tỷ suất lợi nhuận", "d. Lợi tức"],
+        correct: 2,
+        explanation: "Sự chênh lệch tỷ suất lợi nhuận giữa các ngành khác nhau thúc đẩy sự tự do di chuyển vốn (cạnh tranh giữa các ngành)."
+      },
+      {
+        id: "ch4_q6",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Xét về chủ thể xuất khẩu, thì xuất khẩu tư bản được chia thành:",
+        options: [
+          "a. Xuất khẩu tư bản trực tiếp và xuất khẩu tư bản gián tiếp",
+          "b. Xuất khẩu tư bản trong nước và xuất khẩu tư bản nước ngoài",
+          "c. Xuất khẩu tư bản ngắn hạn và dài hạn",
+          "d. Xuất khẩu tư bản tư nhân và xuất khẩu tư bản nhà nước"
+        ],
+        correct: 3,
+        explanation: "Dựa vào chủ thể xuất khẩu, xuất khẩu tư bản gồm xuất khẩu tư bản tư nhân và xuất khẩu tư bản nhà nước."
+      },
+      {
+        id: "ch4_q7",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Nhận định không đúng về mặt tích cực của độc quyền trong nền kinh tế thị trường?",
+        options: [
+          "a. Tạo khả năng lớn trong nghiên cứu và triển khai các hoạt động KH - KT, thúc đẩy sự tiến bộ kỹ thuật",
+          "b. Độc quyền chi phối các quan hệ kinh tế, xã hội, gia tăng sự phân hóa giàu nghèo",
+          "c. Tạo sức mạnh kinh tế góp phần thúc đẩy nền kinh tế phát triển theo hướng sản xuất lớn hiện đại",
+          "d. Tăng NSLĐ, nâng cao năng lực cạnh tranh của tổ chức độc quyền"
+        ],
+        correct: 1,
+        explanation: "Gia tăng phân hóa giàu nghèo là mặt tiêu cực/hạn chế của độc quyền, không phải mặt tích cực."
+      },
+      {
+        id: "ch4_q8",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Cơ chế điều tiết kinh tế của độc quyền nhà nước bao gồm:",
+        options: [
+          "a. Độc quyền tư nhân và sự điều tiết của nhà nước",
+          "b. Cơ chế thị trường, độc quyền tư nhân và sự điều tiết của nhà nước",
+          "c. Cơ chế thị trường và độc quyền tư nhân",
+          "d. Cơ chế thị trường, quy luật thị trường, điều tiết của nhà nước"
+        ],
+        correct: 1,
+        explanation: "Cơ chế kết hợp 3 yếu tố: Cơ chế thị trường + Độc quyền tư nhân + Sự điều tiết của nhà nước tư sản."
+      },
+      {
+        id: "ch4_q9",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Liên kết dọc các doanh nghiệp thuộc các ngành khác nhau có liên quan về kinh tế kỹ thuật là đặc trưng của tổ chức độc quyền nào sau đây?",
+        options: ["a. Syndicate", "b. Cartel", "c. Trust", "d. Consortium"],
+        correct: 3,
+        explanation: "Consortium (hoặc Concern) là hình thức tổ chức độc quyền đa ngành dựa trên liên kết dọc hoặc ngang phức tạp."
+      },
+      {
+        id: "ch4_q10",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Theo Lênin, chủ nghĩa tư bản độc quyền có mấy đặc điểm kinh tế cơ bản?",
+        options: ["a. Bốn", "b. Sáu", "c. Ba", "d. Năm"],
+        correct: 3,
+        explanation: "V.I.Lênin tổng kết 5 đặc điểm kinh tế cơ bản của chủ nghĩa tư bản độc quyền."
+      },
+      {
+        id: "ch4_q11",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Hoàn thiện luận điểm sau của Lênin: \"Bọn tư sản chia nhau thế giới, không phải do tính độc ác đặc biệt của chúng, mà do sự ... đã đạt đến mức độ buộc chúng phải đi vào con đường ấy để kiếm lời\"",
+        options: ["a. Thay đổi", "b. Tập trung", "c. Phát triển", "d. Độc quyền"],
+        correct: 1,
+        explanation: "Trích câu nói của Lênin: '... do sự tập trung đã đạt đến mức độ buộc chúng phải đi vào con đường ấy'."
+      },
+      {
+        id: "ch4_q12",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Xuất khẩu hàng hóa là đặc điểm cơ bản của:",
+        options: [
+          "a. Các nước giàu sang các nước nghèo",
+          "b. Chủ nghĩa tư bản tự do cạnh tranh",
+          "c. Chủ nghĩa tư bản độc quyền",
+          "d. Các nước nghèo sang các nước giàu"
+        ],
+        correct: 1,
+        explanation: "Giai đoạn tự do cạnh tranh đặc trưng bởi Xuất khẩu hàng hóa; còn giai đoạn độc quyền đặc trưng bởi Xuất khẩu tư bản."
+      },
+      {
+        id: "ch4_q13",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Đóng góp tích cực và quan trọng nhất của chủ nghĩa tư bản đối với sự phát triển kinh tế - xã hội của nhân loại?",
+        options: [
+          "a. Điều hòa mâu thuẫn giữa các giai cấp và tầng lớp trong xã hội",
+          "b. Thúc đẩy lực lượng sản xuất phát triển nhanh chóng",
+          "c. Xây dựng nhà nước pháp quyền tư sản để quản lý xã hội",
+          "d. Duy trì và phát triển chế độ tư hữu lên đỉnh cao"
+        ],
+        correct: 1,
+        explanation: "Đóng góp lịch sử lớn nhất của CNTB là tạo ra bước phát triển nhảy vọt của lực lượng sản xuất xã hội."
+      },
+      {
+        id: "ch4_q14",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Các tổ chức độc quyền ở thời kỳ đầu thường chọn nơi nào để xuất khẩu tư bản?",
+        options: [
+          "a. Các nước có nền kinh tế kém phát triển",
+          "b. Tại chính quốc",
+          "c. Tại các nước tư bản phát triển cao",
+          "d. Các quốc gia đang xảy ra chiến tranh"
+        ],
+        correct: 0,
+        explanation: "Ban đầu các nước độc quyền hướng xuất khẩu tư bản tới các nước kém phát triển vì thừa vốn, thiếu tài nguyên, giá đất và nhân công rất rẻ."
+      },
+      {
+        id: "ch4_q15",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Nguyên nhân sâu xa của sự chuyển biến từ chủ nghĩa tư bản tự do cạnh tranh sang chủ nghĩa tư bản độc quyền là?",
+        options: [
+          "a. Sự phân hóa giàu nghèo trong xã hội tư bản",
+          "b. Sự lạc hậu của quan hệ sản xuất tư bản chủ nghĩa",
+          "c. Mâu thuẫn giai cấp đối kháng gay gắt đến mức không thể điều hòa được",
+          "d. Trình độ phát triển của lực lượng sản xuất"
+        ],
+        correct: 3,
+        explanation: "Sự phát triển đột phá của lực lượng sản xuất dưới tác động của tiến bộ KH-KT làm thúc đẩy quá trình tích tụ và tập trung sản xuất đến mức sinh ra độc quyền."
+      },
+      {
+        id: "ch4_q16",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Sự phân chia thế giới về lãnh thổ giữa các cường quốc đế quốc đã gây ra hậu quả nghiêm trọng nào đối với nhân loại?",
+        options: [
+          "a. Môi trường sinh thái bị phá hủy nghiêm trọng",
+          "b. Chiến tranh thế giới",
+          "c. Hình thành chủ nghĩa khủng bố mang tính quốc tế",
+          "d. Nhân dân các nước trên thế giới trở nên mâu thuẫn nhau"
+        ],
+        correct: 1,
+        explanation: "Cuộc tranh giành thuộc địa và chia lại thị trường giữa các đế quốc là nguyên nhân trực tiếp dẫn tới 2 cuộc Chiến tranh thế giới thảm khốc."
+      },
+      {
+        id: "ch4_q17",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Chế độ tham dự của tư bản tài chính được thiết lập do:",
+        options: [
+          "a. Yêu cầu của các tổ chức độc quyền công nghiệp",
+          "b. Số cổ phiếu khống chế nắm công ty mẹ, công ty con, công ty cháu",
+          "c. Quyết định của nhà nước",
+          "d. Yêu cầu tổ chức của các ngân hàng"
+        ],
+        correct: 1,
+        explanation: "Chế độ tham dự thực hiện bằng việc mua số cổ phiếu khống chế để chi phối công ty mẹ, từ đó chi phối công ty con, công ty cháu."
+      },
+      {
+        id: "ch4_q18",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Trong tổ chức độc quyền Các-ten, các nhà tư bản độc lập về hoạt động gì? Chọn phương án đúng nhất",
+        options: [
+          "a. Thuế quan mậu dịch",
+          "b. Tiêu chuẩn đo lường chất lượng hàng hóa",
+          "c. Sản xuất và thương nghiệp",
+          "d. Lưu thông hàng hóa"
+        ],
+        correct: 2,
+        explanation: "Cartel là hình thức sơ khai, các thành viên chỉ thỏa thuận về giá cả/thị trường tiêu thụ nhưng vẫn độc lập về cả sản xuất lẫn thương nghiệp."
+      },
+      {
+        id: "ch4_q19",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Cơ chế để thực hiện sự thống trị của nhóm nhỏ các nhà tư bản tài chính (tài phiệt) đó là:",
+        options: ["a. Lợi nhuận độc quyền", "b. Giá cả độc quyền", "c. Chế độ tham dự", "d. Cho vay nặng lãi"],
+        correct: 2,
+        explanation: "Chế độ tham dự là cơ chế chủ yếu để nhóm tài phiệt chi phối toàn bộ nền kinh tế."
+      },
+      {
+        id: "ch4_q20",
+        chapterId: "chuong4",
+        chapterName: "Chương 4",
+        question: "Mối quan hệ giữa độc quyền và cạnh tranh trong chủ nghĩa tư bản là:",
+        options: [
+          "a. Độc quyền sẽ thủ tiêu cạnh tranh",
+          "b. Độc quyền và cạnh tranh hoàn toàn độc lập với nhau",
+          "c. Độc quyền làm giảm sự cạnh tranh",
+          "d. Độc quyền làm cho cạnh tranh trở nên gay gắt hơn"
+        ],
+        correct: 3,
+        explanation: "Độc quyền không xua tan cạnh tranh mà làm cho cạnh tranh trở nên gay gắt, khốc liệt hơn."
+      },
+
+      // ================= CHƯƠNG 5 =================
+      {
+        id: "ch5_q1",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Đâu không phải là luận điểm giải thích lí do chọn mô hình Kinh tế thị trường định hướng XHCN Ở Việt Nam hiện nay?",
+        options: [
+          "a. Phù hợp với xu hướng phát triển khách quan của Việt Nam trong bối cảnh thế giới hiện nay.",
+          "b. Do tính tất yếu, khách quan của sự phát triển quan hệ sản xuất",
+          "c. Phù hợp với mục tiêu dân giàu, nước mạnh, dân chủ, công bằng, văn minh của dân tộc Việt Nam",
+          "d. Do tính ưu việt của kinh tế thị trường trong thúc đẩy phát triển VN theo định hướng XHCN"
+        ],
+        correct: 1,
+        explanation: "Mô hình này nhằm giải phóng và phát triển mạnh mẽ Lực lượng sản xuất, chứ không phải đơn thuần là tất yếu do sự phát triển sẵn có của quan hệ sản xuất."
+      },
+      {
+        id: "ch5_q2",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Trong các nhân tố ảnh hưởng đến quan hệ lợi ích kinh tế, nhân tố nào biểu hiện sự tác động mạnh mẽ và nhiều chiều đến lợi ích kinh tế của các chủ thể?",
+        options: [
+          "a. Địa vị các chủ thể trong hệ thống quan hệ sản xuất xã hội",
+          "b. Hội nhập kinh tế quốc tế",
+          "c. Chính sách phân phối thu nhập của nhà nước",
+          "d. Trình độ phát triển của lực lượng sản xuất xã hội"
+        ],
+        correct: 3,
+        explanation: "Trình độ phát triển lực lượng sản xuất là nhân tố cơ bản nhất quyết định quy mô và khả năng thỏa mãn các lợi ích kinh tế."
+      },
+      {
+        id: "ch5_q3",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Thành phần kinh tế nào sau đây được xem là nòng cốt để phát triển một nền kinh tế độc lập tự chủ trong nền kinh tế thị trường định hướng xã hội chủ nghĩa ở Việt Nam?",
+        options: [
+          "a. Kinh tế nhà nước, kinh tế có vốn đầu tư nước ngoài",
+          "b. Kinh tế nhà nước và kinh tế tập thể",
+          "c. Kinh tế nhà nước và kinh tế tư nhân",
+          "d. Kinh tế tư nhân và kinh tế tập thể"
+        ],
+        correct: 1,
+        explanation: "Kinh tế nhà nước cùng với kinh tế tập thể ngày càng trở thành nền tảng vững chắc của nền kinh tế quốc dân."
+      },
+      {
+        id: "ch5_q4",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Nguyên tắc giải quyết mâu thuẫn giữa các lợi ích kinh tế là gì?",
+        options: [
+          "a. Phải thường xuyên quan tâm phát hiện mâu thuẫn và chuẩn bị chu đáo các giải pháp đối phó",
+          "b. Phải có sự tham gia hòa giải của các tổ chức xã hội có liên quan, đặc biệt là nhà nước",
+          "c. Tham gia của các bên liên quan, có nhân nhượng và phải đặt lợi ích đất nước lên trên hết",
+          "d. Phải giải quyết kịp thời, có lí có tình, đảm bảo lợi ích hài hòa giữa các bên"
+        ],
+        correct: 3,
+        explanation: "Phải giải quyết kịp thời, kết hợp các phương thức hài hòa lợi ích giữa các bên."
+      },
+      {
+        id: "ch5_q5",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Đối với chủ doanh nghiệp, biểu hiện lợi ích kinh tế là gì?",
+        options: [
+          "a. Đóng góp cho cộng đồng",
+          "b. Tiền công của người làm thuê",
+          "c. Lợi nhuận của doanh nghiệp",
+          "d. Thương hiệu của doanh nghiệp"
+        ],
+        correct: 2,
+        explanation: "Lợi nhuận là mục tiêu và biểu hiện lợi ích kinh tế trực tiếp nhất của chủ doanh nghiệp."
+      },
+      {
+        id: "ch5_q6",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Để đảm bảo sự thống nhất giữa lợi ích cá nhân và lợi ích xã hội cần phải thực hiện?",
+        options: [
+          "a. Đặt lợi ích nhóm lên hàng đầu",
+          "b. Đảm bảo lợi ích cá nhân trước hết",
+          "c. Chỉ cần tôn trọng lợi ích xã hội",
+          "d. Chống \"lợi ích nhóm\" và \"nhóm lợi ích\" tiêu cực"
+        ],
+        correct: 3,
+        explanation: "Kiên quyết loại bỏ và đấu tranh chống các 'lợi ích nhóm' tiêu cực làm tổn hại đến lợi ích chung của xã hội."
+      },
+      {
+        id: "ch5_q7",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Điền vào chỗ trống từ còn thiếu để có cách hiểu đúng về lợi ích kinh tế? “Lợi ích kinh tế là lợi ích........ lợi ích thu được khi thực hiện các hoạt động kinh tế của con người.\"",
+        options: ["a. Tập thể", "b. Cá nhân", "c. Vật chất", "d. Tinh thần"],
+        correct: 2,
+        explanation: "Lợi ích kinh tế trước hết chính là lợi ích vật chất thu được."
+      },
+      {
+        id: "ch5_q8",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Cơ sở sâu xa cho sự hình thành sở hữu hiện thực, trước hết xuất phát từ quá trình nào sau đây?",
+        options: [
+          "a. Quá trình sản xuất hàng hóa",
+          "b. Quá trình lưu thông xã hội",
+          "c. Quá trình sản xuất và tái sản xuất xã hội",
+          "d. Quá trình tích lũy hàng hóa"
+        ],
+        correct: 2,
+        explanation: "Sở hữu hiện thực nảy sinh và được củng cố thông qua toàn bộ quá trình sản xuất và tái sản xuất xã hội."
+      },
+      {
+        id: "ch5_q9",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Chọn câu trả lời sai về vai trò của nhà nước trong bảo đảm hài hòa các quan hệ lợi ích?",
+        options: [
+          "a. Tập trung vào việc nâng cao lợi ích cá nhân",
+          "b. Kiểm soát, ngăn ngừa các quan hệ lợi ích có ảnh hưởng tiêu cực đối với sự phát triển xã hội",
+          "c. Bảo vệ lợi ích hợp pháp, tạo môi trường thuận lợi cho hoạt động tìm kiếm lợi ích của các chủ thể kinh tế",
+          "d. Giải quyết những mâu thuẫn trong quan hệ lợi ích kinh tế"
+        ],
+        correct: 0,
+        explanation: "Nhà nước không thể chỉ tập trung vào nâng cao lợi ích cá nhân mà phải bảo đảm hài hòa tổng thể lợi ích cá nhân, tập thể và toàn xã hội."
+      },
+      {
+        id: "ch5_q10",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Trong các hình thức lợi ích kinh tế, hình thức nào sau đây được xem là cơ sở, nền tảng của các hình thức lợi ích khác?",
+        options: ["a. Lợi ích nhóm", "b. Lợi ích cá nhân", "c. Lợi ích xã hội", "d. Lợi ích cộng đồng"],
+        correct: 1,
+        explanation: "Lợi ích cá nhân là cơ sở, nền tảng tồn tại của các lợi ích khác vì xã hội là do các cá nhân hợp thành."
+      },
+      {
+        id: "ch5_q11",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Đâu là những điều kiện vật chất để thực hiện ngày càng đầy đủ sự công bằng xã hội trong phân phối?",
+        options: [
+          "a. Xây dựng môi trường pháp luật thông thoáng, bảo vệ được lợi ích chính đáng của các chủ thể kinh tế trong và ngoài nướcC",
+          "b. Phát triển mạnh mẽ lực lượng sản xuất, phát triển khoa học - công nghệ để nâng cao thu nhập cho các chủ thể kinh tế",
+          "c. Nhà nước phải đưa ra được các chính sách phù hợp với nhu cầu của nền kinh tế trong từng giai đoạn phát triển",
+          "d. Nâng cao địa vị của chủ thể trong hệ thống quan hệ sản xuất xã hội"
+        ],
+        correct: 1,
+        explanation: "Phát triển mạnh mẽ lực lượng sản xuất để gia tăng của cải xã hội là cơ sở vật chất quyết định để thực hiện công bằng phân phối."
+      },
+      {
+        id: "ch5_q12",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Trong các luận điểm sau, đâu không phải là vai trò của lợi ích kinh tế?",
+        options: [
+          "a. Lợi ích kinh tế là động lực trực tiếp của các chủ thể kinh tế - xã hội",
+          "b. Lợi ích kinh tế là cơ sở thúc đẩy sự phát triển của các lợi ích khác",
+          "c. Lợi ích kinh tế là mục tiêu hàng đầu của các chủ thể kinh tế - xã hội",
+          "d. Lợi ích kinh tế là động lực trực tiếp của các hoạt động kinh tế - xã hội"
+        ],
+        correct: 2,
+        explanation: "Lợi ích kinh tế mang tính động lực và cơ sở, không được coi là 'mục tiêu hàng đầu duy nhất' định khung cho mọi hành vi xã hội."
+      },
+      {
+        id: "ch5_q13",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Đâu không phải là lý do cần thực hiện hoàn thiện thể chế kinh tế thị trường định hướng xã hội chủ nghĩa?",
+        options: [
+          "a. Do thể chế kinh tế thị trường định hướng xã hội chủ nghĩa còn chưa đầy đủ",
+          "b. Do thể chế kinh tế thị trường định hướng xã hội chủ nghĩa còn chưa đồng bộ",
+          "c. Do thể chế kinh tế thị trường định hướng xã hội chủ nghĩa còn kém hiệu lực, hiệu quả, kém đầy đủ các yếu tố thị trường và các loại thị trường",
+          "d. Do thể chế kinh tế thị trường định hướng xã hội chủ nghĩa ra đời sau nên chưa theo kịp các thể chế kinh tế thị trường khác"
+        ],
+        correct: 3,
+        explanation: "Hoàn thiện xuất phát từ yêu cầu nội tại về tính đồng bộ, hiệu lực của nền kinh tế chứ không do tâm lý 'ra đời sau nên chưa theo kịp'."
+      },
+      {
+        id: "ch5_q14",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Trong các nhân tố ảnh hưởng đến quan hệ lợi ích kinh tế thì việc phát triển nhân tố nào trở thành nhiệm vụ quan trọng hàng đầu của các quốc gia?",
+        options: [
+          "a. Phát triển lực lượng sản xuất",
+          "b. Phát triển chính sách phân phối thu nhập của nhà nước",
+          "c. Phát triển địa vị của chủ thể trong hệ thống quan hệ sản xuất xã hội",
+          "d. Tích cực, chủ động hội nhập kinh tế quốc tế"
+        ],
+        correct: 0,
+        explanation: "Phát triển lực lượng sản xuất là nhiệm vụ trung tâm hàng đầu."
+      },
+      {
+        id: "ch5_q15",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Để chống lại các hình thức thu nhập bất hợp pháp, bảo đảm hài hòa các lợi ích kinh tế trước hết cần phải làm gì?",
+        options: [
+          "a. Đẩy mạnh các hoạt động nhân đạo, từ thiện, giúp đỡ người nghèo",
+          "b. Chú trọng các chính sách ưu đãi xã hội",
+          "c. Xây dựng bộ máy nhà nước liêm chính, có hiệu lực",
+          "d. Nhà nước cần thực hiện chính sách xóa đói giảm nghèo"
+        ],
+        correct: 2,
+        explanation: "Xây dựng bộ máy nhà nước trong sạch, liêm chính, pháp luật nghiêm minh là yếu tố tiên quyết phòng chống thu nhập bất minh."
+      },
+      {
+        id: "ch5_q16",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Đâu không phải là bộ phận cơ bản của thể chế kinh tế?",
+        options: [
+          "a. Các cơ chế, phương pháp, thủ tục thực hiện các quy định và vận hành nền kinh tế",
+          "b. Hệ thống các chủ thể thực hiện các hoạt động kinh tế",
+          "c. Các cương lĩnh, đường lối phát triển kinh tế - xã hội",
+          "d. Hệ thống pháp luật về kinh tế của nhà nước và các quy tắc xã hội được nhà nước thừa nhận"
+        ],
+        correct: 2,
+        explanation: "Thể chế kinh tế gồm 3 bộ phận: Luật pháp/quy tắc + Các chủ thể + Cơ chế vận hành. Đường lối/cương lĩnh thuộc định hướng chính trị."
+      },
+      {
+        id: "ch5_q17",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Thành phần kinh tế nào giữ vai trò là một động lực quan trọng trong kinh tế thị trường định hướng xã hội chủ nghĩa ở Việt Nam?",
+        options: ["a. Kinh tế tư nhân", "b. Kinh tế nhà nước", "c. Kinh tế tập thể", "d. Kinh tế có vốn đầu tư nước ngoài"],
+        correct: 0,
+        explanation: "Kinh tế tư nhân là một động lực quan trọng của nền kinh tế."
+      },
+      {
+        id: "ch5_q18",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Nội dung nào sau đây không diễn đạt lợi ích kinh tế cơ bản trong nền kinh tế thị trường?",
+        options: [
+          "a. Quan hệ lợi ích giữa những người sử dụng lao động với nhau",
+          "b. Quan hệ lợi ích giữa người sản xuất và người tiêu dùng",
+          "c. Quan hệ lợi ích giữa những người lao động với nhau",
+          "d. Quan hệ lợi ích giữa người lao động và người sử dụng lao động"
+        ],
+        correct: 0,
+        explanation: "Các quan hệ lợi ích kinh tế cơ bản bao gồm: Người lao động & Người sử dụng LĐ, Người sản xuất & Người tiêu dùng, Giữa những người lao động với nhau."
+      },
+      {
+        id: "ch5_q19",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Theo Ph.Ăngghen những quan hệ kinh tế của một xã hội nhất định biểu hiện trước hết dưới hình thái nào sau đây?",
+        options: ["a. Thị trường", "b. Tiền tệ", "c. Lợi ích", "d. Hàng hóa"],
+        correct: 2,
+        explanation: "Ph.Ăngghen khẳng định các quan hệ kinh tế biểu hiện trước hết dưới hình thái Lợi ích."
+      },
+      {
+        id: "ch5_q20",
+        chapterId: "chuong5",
+        chapterName: "Chương 5",
+        question: "Chọn câu trả lời sai khi đề cập đến phương thức thực hiện lợi ích kinh tế trong các quan hệ lợi ích chủ yếu?",
+        options: [
+          "a. Thực hiện lợi ích kinh tế theo nguyên tắc thị trường",
+          "b. Thực hiện lợi ích kinh tế theo chính sách của nhà nước",
+          "c. Thực hiện lợi ích kinh tế theo vai trò của các tổ chức xã hội",
+          "d. Thực hiện lợi ích kinh tế theo nhu cầu cá nhân"
+        ],
+        correct: 3,
+        explanation: "Không thể tự do thực hiện theo 'nhu cầu cá nhân' tùy tiện mà phải dựa trên nguyên tắc thị trường và khuôn khổ pháp luật nhà nước."
+      },
+
+      // ================= CHƯƠNG 6 =================
+      {
+        id: "ch6_q1",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Đặc trưng cơ bản của cách mạng công nghiệp lần thứ Tư là gì?",
+        options: [
+          "a. Sử dụng công nghệ thông tin, tự động hóa sản xuất",
+          "b. Chuyển từ lao động thủ công thành lao động sử dụng máy móc",
+          "C. Xuất hiện các công nghệ mới có tính đột phá về chất như trí tuệ nhân tạo, in 3D...",
+          "d. Sử dụng năng lượng điện và động cơ điện"
+        ],
+        correct: 2,
+        explanation: "CMCN 4.0 đặc trưng bởi sự đột phá tích hợp AI, IoT, Big Data, In 3D, Công nghệ sinh học..."
+      },
+      {
+        id: "ch6_q2",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Quá trình công nghiệp hóa – hiện đại hóa ở Việt Nam hiện nay trước hết cần ưu tiên phát triển ngành công nghiệp nào sau đây?",
+        options: ["a. Công nghiệp năng lượng", "b. Công nghiệp cơ khí", "c. Công nghiệp hàng tiêu dùng", "d. Công nghiệp điện tử"],
+        correct: 1,
+        explanation: "Công nghiệp cơ khí chế tạo được coi là xương sống tạo ra tư liệu lao động cho các ngành kinh tế khác."
+      },
+      {
+        id: "ch6_q3",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Nội dung cơ bản của cách mạng công nghiệp lần thứ Hai là gì?",
+        options: [
+          "a. Sử dụng công nghệ thông tin và tự động hóa sản xuất",
+          "b. Chuyển từ lao động thủ công thành lao động sử dụng máy móc, thực hiện cơ giới hóa sản xuất bằng việc sử dụng năng lượng nước và hơi nước",
+          "c. Sự xuất hiện các công nghệ mới có tính đột phá về chất như trí tuệ nhân tạo, in 3D...",
+          "d. Sử dụng năng lượng điện và động cơ điện để tạo ra các dây chuyền sản xuất có tính chuyên môn hóa cao, chuyển nền sản xuất cơ khí sang nền sản xuất điện cơ khí và sang giai đoạn tự động hóa cục bộ trong sản xuất"
+        ],
+        correct: 3,
+        explanation: "CMCN lần thứ 2 gắn liền với năng lượng điện, động cơ điện và dây chuyền sản xuất hàng loạt."
+      },
+      {
+        id: "ch6_q4",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Sự thích ứng hiệu quả với những tác động mới của cách mạng công nghiệp lần thứ Tư được xác định là nhiệm của ai?",
+        options: ["a. Nhà nước", "b. Các tổ chức kinh tế", "C. Toàn dân", "d. Doanh nghiệp"],
+        correct: 2,
+        explanation: "Là nhiệm vụ chung của toàn dân, toàn hệ thống chính trị và mọi chủ thể xã hội."
+      },
+      {
+        id: "ch6_q5",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Hệ thống mạng internet, máy tính cá nhân, thiết bị điện tử sử dụng công nghệ số và robot công nghiệp xuất hiện từ cuộc cách mạng công nghiệp nào?",
+        options: [
+          "a. Cách mạng công nghiệp lần thứ tư",
+          "b. Cách mạng công nghiệp lần thứ ba",
+          "C. Cách mạng công nghiệp lần thứ nhất",
+          "d. Cách mạng công nghiệp lần thứ hai"
+        ],
+        correct: 1,
+        explanation: "CMCN lần thứ 3 (cuối thế kỷ 20) ra đời gắn liền với công nghệ thông tin, bán dẫn, máy tính và tự động hóa."
+      },
+      {
+        id: "ch6_q6",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Nguồn vốn để công nghiệp hóa ở các nước tư bản cổ điển chủ yếu là do?",
+        options: [
+          "a. Nguồn viện trợ từ các nước phát triển",
+          "b. Vận động từ quần chúng nhân dân",
+          "c. Huy động những nguồn lực to lớn trong xã hội",
+          "d. Bóc lột lao động làm thuê"
+        ],
+        correct: 3,
+        explanation: "CNH ở các nước tư bản cổ điển ban đầu được tích lũy từ bóc lột công nhân trong nước và cướp bóc thuộc địa."
+      },
+      {
+        id: "ch6_q7",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Cơ cấu lợi ích nào dưới đây thuộc thành phần kinh tế nhà nước",
+        options: [
+          "a. Lợi ích nhà nước, lợi ích xã hội, lợi ích doanh nghiệp",
+          "b. Lợi ích nhà nước, lợi ích tập thể, lợi ích cá nhân",
+          "c. Lợi ích doanh nghiệp, lợi ích xã hội, lợi ích cá nhân",
+          "d. Lợi ích chủ doanh nghiệp, lợi ích cá nhân, lợi ích xã hội"
+        ],
+        correct: 0,
+        explanation: "Gồm Lợi ích Nhà nước, Lợi ích xã hội và Lợi ích doanh nghiệp nhà nước."
+      },
+      {
+        id: "ch6_q8",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Chọn câu trả lời sai khi đề cập đến những đặc điểm chủ yếu của nền kinh tế tri thức?",
+        options: [
+          "a. Tri thức khoa học trở thành lực lượng sản xuất gián tiếp",
+          "b. Mọi hoạt động đều có liên quan đến vấn đề toàn cầu hóa kinh tế",
+          "c. Công nghệ thông tin được ứng dụng rộng rãi",
+          "d. Nguồn nhân lực nhanh chóng được tri thức hóa"
+        ],
+        correct: 0,
+        explanation: "Trong nền kinh tế tri thức, tri thức trở thành lực lượng sản xuất TRỰC TIẾP chứ không còn là gián tiếp."
+      },
+      {
+        id: "ch6_q9",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Sử dụng năng lượng điện và động cơ điện để tạo ra các dây chuyền sản xuất có tính chuyên môn hóa cao, chuyển nền sản xuất cơ khí sang nền sản xuất điện cơ khí và sang giai đoạn tự động hóa cục bộ trong sản xuất. Đây là nội dung cơ bản của cuộc cách mạng công nghiệp nào?",
+        options: [
+          "a. Cách mạng công nghiệp lần thứ ba",
+          "b. Cách mạng công nghiệp lần thứ tư",
+          "C. Cách mạng công nghiệp lần thứ nhất",
+          "d. Cách mạng công nghiệp lần thứ hai"
+        ],
+        correct: 3,
+        explanation: "Đây là nội dung đặc trưng cốt lõi của CMCN lần thứ hai."
+      },
+      {
+        id: "ch6_q10",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Công nghiệp hóa ở nước Anh được bắt đầu từ ngành nào?",
+        options: ["a. Công nghiệp giải trí", "b. Công nghiệp nặng", "c. Công nghiệp chế biến", "d. Công nghiệp nhẹ"],
+        correct: 3,
+        explanation: "Nước Anh bắt đầu cuộc CNH lịch sử từ ngành công nghiệp nhẹ (ngành dệt)."
+      },
+      {
+        id: "ch6_q11",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Để xây dựng nền kinh tế có tính độc lập tự chủ cao, theo Lênin cần phải ưu tiên nội dung nào sau đây?",
+        options: [
+          "a. Ưu tiên nâng cao trình độ người lao động",
+          "b. Ưu tiên cải thiện chất lượng đối tượng lao động",
+          "C. Ưu tiên đầu tư cho các quan hệ sản xuất",
+          "d. Ưu tiên phát triển tư liệu sản xuất"
+        ],
+        correct: 3,
+        explanation: "Lênin khẳng định muốn xây dựng nền kinh tế tự chủ độc lập phải ưu tiên phát triển sản xuất tư liệu sản xuất."
+      },
+      {
+        id: "ch6_q12",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Để thích ứng với các mạng công nghiệp lần thứ tư, công nghiệp hóa, hiện đại hóa ở Việt Nam phải như thế nào? Chọn câu trả lời sai",
+        options: [
+          "a. Nắm bắt và đẩy mạnh việc ứng dụng những thành tựu của cuộc cách mạng công nghiệp 4.0",
+          "b. Hoàn thiện thể chế, xây dựng nền kinh tế dựa trên nền tảng sáng tạo",
+          "c. Duy trì nền kinh tế ổn định, tăng cường nhờ hỗ trợ từ các nước phát triển",
+          "d. Chuẩn bị các điều kiện cần thiết để ứng phó với những tác động tiêu cực của cách mạng công nghiệp 4.0"
+        ],
+        correct: 2,
+        explanation: "Việt Nam phải tự lực tự cường và chủ động thích ứng chứ không phụ thuộc ỷ lại 'nhờ hỗ trợ từ các nước phát triển'."
+      },
+      {
+        id: "ch6_q13",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Nhân tố quyết định sự thắng lợi của con đường đi lên chủ nghĩa xã hội mà Đảng và Nhân dân ta đã lựa chọn là?",
+        options: [
+          "a. Sự ổn định chính trị",
+          "b. Tăng cường giao lưu văn hóa",
+          "c. Công nghiệp hóa – hiện đại hóa",
+          "d. Sự đoàn kết của các giai cấp tầng lớp"
+        ],
+        correct: 2,
+        explanation: "Công nghiệp hóa, hiện đại hóa là nhiệm vụ trung tâm xây dựng cơ sở vật chất - kỹ thuật cho CNXH."
+      },
+      {
+        id: "ch6_q14",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Trong hệ thống cơ cấu kinh tế thì cơ cấu nào giữ vị trí quan trọng nhất?",
+        options: ["a. Cơ cấu độ tuổi lao động", "b. Cơ cấu vùng", "C. Cơ cấu thành phần kinh tế", "d. Cơ cấu ngành"],
+        correct: 3,
+        explanation: "Cơ cấu ngành kinh tế (nông - công - dịch vụ) giữ vị trí quan trọng nhất."
+      },
+      {
+        id: "ch6_q15",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Trong số các nội dung sau đây, nội dung nào không biểu thị cho các điều kiện cần thiết để ứng phó với những tác động tiêu cực của cách mạng công nghiệp 4.0?",
+        options: [
+          "a. Phát triển ngành nông nghiệp theo hướng phát huy lợi thế về tài nguyên thiên nhiên",
+          "b. Phát triển hợp lý các vùng lãnh thổ",
+          "C. Đẩy mạnh công nghiệp hóa, hiện đại hóa nông nghiệp, nông thôn",
+          "d. Tích cực chủ động hội nhập quốc tế"
+        ],
+        correct: 0,
+        explanation: "Phát triển nông nghiệp chỉ dựa vào 'tài nguyên thiên nhiên' thô sơ là lạc hậu, không phù hợp tinh thần thích ứng công nghệ 4.0."
+      },
+      {
+        id: "ch6_q16",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Thách thức lớn nhất mà các quốc gia phải đối diện trong cuộc cách mạng công nghiệp lần thứ Tư là gì?",
+        options: [
+          "a. Sức ép cạnh tranh và thích ứng rất lớn",
+          "b. Nạn thất nghiệp và phân hóa thu nhập gay gắt",
+          "c. Sự thiếu hụt về tài nguyên thiên nhiên và ô nhiễm môi trường",
+          "d. Khoảng cách phát triển về lực lượng sản xuất"
+        ],
+        correct: 0,
+        explanation: "Sức ép tụt hậu, cạnh tranh và khả năng biến đổi thích ứng nhanh chóng là thách thức bao trùm lớn nhất."
+      },
+      {
+        id: "ch6_q17",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Cuộc cách mạng công nghệ nào sau đây sẽ có sự hợp nhất về công nghệ từ đó xóa bỏ ranh giới giữa các lĩnh vực kỹ thuật số, vật lý và sinh học?",
+        options: [
+          "a. Cách mạng công nghiệp lần thứ tư",
+          "b. Cách mạng công nghiệp lần thứ hai",
+          "C. Cách mạng công nghiệp lần thứ nhất",
+          "d. Cách mạng công nghiệp lần thứ ba"
+        ],
+        correct: 0,
+        explanation: "Đây là định nghĩa cốt lõi của Cách mạng công nghiệp 4.0."
+      },
+      {
+        id: "ch6_q18",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Các cuộc cách mạng công nghiệp xuất hiện đều có những nội dung cốt lõi về yếu tố nào sau đây?",
+        options: ["a. Đối tượng lao động", "b. Quan hệ sản xuất", "C. Tư liệu lao động", "d. Quan hệ lao động"],
+        correct: 2,
+        explanation: "Mọi cuộc cách mạng công nghiệp đều bắt đầu và xoay quanh sự nhảy vọt của Tư liệu lao động (máy móc, công cụ)."
+      },
+      {
+        id: "ch6_q19",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Nội dung nào sau đây không phải là điều kiện cần thiết để ứng phó với những tác động tiêu cực của cách mạng công nghiệp 4.0?",
+        options: [
+          "a. Phát huy lợi thế trong nước để phát triển nông nghiệp",
+          "b. Xây dựng và phát triển hạ tầng kỹ thuật về công nghệ thông tin và truyền thông",
+          "C. Cải tạo, mở rộng, nâng cấp và xây dựng mới có trọng điểm kết cấu hạ tầng kinh tế, xã hội tạo điều kiện để thu hút đầu tư trong và ngoài nước",
+          "d. Phát triển nguồn nhân lực, đặc biệt là nguồn nhân lực chất lượng cao"
+        ],
+        correct: 0,
+        explanation: "Phương án 'a' không thuộc nội dung điều kiện chuẩn bị ứng phó tiêu cực CMCN 4.0 theo SGK."
+      },
+      {
+        id: "ch6_q20",
+        chapterId: "chuong6",
+        chapterName: "Chương 6",
+        question: "Điền vào chỗ trống từ còn thiếu để hoàn thiện khái niệm về hội nhập kinh tế quốc tế: \"Hội nhập kinh tế quốc tế của một quốc gia đó là thực hiện gắn kết nền kinh tế của mình với nền kinh tế thế giới dựa trên sự chia sẻ lợi ích đồng thời tuân thủ các quốc tế chung\"",
+        options: ["a. Thoả thuận", "b. Pháp luật", "c. Nguyên tắc", "d. Chuẩn mực"],
+        correct: 3,
+        explanation: "Nguyên văn: '... đồng thời tuân thủ các chuẩn mực quốc tế chung'."
+      },
+
+      // ================= BÀI TẬP TỔNG HỢP =================
+      {
+        id: "synth_q1",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Nhà sản xuất thu được lợi nhuận độc quyền là:",
+        options: [
+          "a. Lợi nhuận thu được bằng lợi nhuận bình quân.",
+          "b. Lợi nhuận do Nhà nước cấp cho các tổ chức độc quyền.",
+          "c. Lợi nhuận thu được do cạnh tranh giữa các tổ chức độc quyền.",
+          "d. Lợi nhuận thu được cao hơn lợi nhuận bình quân do vị thế độc quyền."
+        ],
+        correct: 3,
+        explanation: "Lợi nhuận độc quyền là lợi nhuận thu được cao hơn lợi nhuận bình quân nhờ nắm vị thế độc quyền chi phối thị trường."
+      },
+      {
+        id: "synth_q2",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Khi thực hiện phương pháp trừu tượng hóa khoa học, người nghiên cứu cần lưu ý điều gì để không làm sai lệch bản chất đối tượng?",
+        options: [
+          "a. Chỉ tập trung nghiên cứu những hiện tượng kinh tế tích cực.",
+          "b. Gạt bỏ những cái tạm thời, ngẫu nhiên nhưng phải giữ lại những mối liên hệ tất yếu, bền vững.",
+          "c. Giữ lại những hiện tượng, yếu tố tạm thời trong quá trình nghiên cứu.",
+          "d. Gạt bỏ những bộ phận phức tạp của đối tượng để nghiên cứu những yếu tố đơn giản, cụ thể."
+        ],
+        correct: 1,
+        explanation: "Nguyên tắc trừu tượng hóa: gạt bỏ ngẫu nhiên bề ngoài nhưng tuyệt đối giữ lại những mối liên hệ phổ biến, bản chất."
+      },
+      {
+        id: "synth_q3",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Nguồn gốc thực sự của tiền trả công cho công nhân là từ đâu?",
+        options: [
+          "a. Từ quỹ dự trữ tiền mặt mà nhà tư bản đã tích lũy từ tổ tiên.",
+          "b. Từ lợi nhuận thu được do nhà tư bản bán hàng hóa đắt hơn giá trị.",
+          "c. Do hao phí sức lao động của chính người công nhân tự trả cho mình thông qua sổ sách của nhà tư bản.",
+          "d. Do ngân hàng trung ương in ra và phân phối cho các doanh nghiệp."
+        ],
+        correct: 2,
+        explanation: "Tiền lương thực chất do chính lao động của công nhân tạo ra trong quá trình sản xuất tái tạo lại giá trị sức lao động."
+      },
+      {
+        id: "synth_q4",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Tại sao nền kinh tế tri thức được coi là giai đoạn phát triển cao của công nghiệp hóa?",
+        options: [
+          "a. Vì nó yêu cầu tất cả người dân phải trở thành nhà khoa học mới có thể làm việc.",
+          "b. Vì trong nền kinh tế này, mọi sản phẩm đều được sản xuất bởi các máy móc cơ khí thô sơ.",
+          "c. Vì nó loại bỏ hoàn toàn vai trò của các ngành sản xuất vật chất như công nghiệp và nông nghiệp.",
+          "d. Vì tri thức đóng vai trò quyết định nhất đối với sự phát triển kinh tế, tạo ra của cải và nâng cao chất lượng cuộc sống."
+        ],
+        correct: 3,
+        explanation: "Kinh tế tri thức là đỉnh cao của CNH - HĐH vì biến tri thức trở thành nguồn lực sản xuất quan trọng bậc nhất."
+      },
+      {
+        id: "synth_q5",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Thuật ngữ \"Cách mạng công nghiệp lần thứ tư\" được đề cập lần đầu tiên tại địa điểm nào?",
+        options: [
+          "a. Hội nghị thượng đỉnh G20 về công nghệ số.",
+          "b. Hội chợ triển lãm công nghệ Hannover (Đức).",
+          "c. Diễn đàn Kinh tế Thế giới (WEF) tại Davos.",
+          "d. Triển lãm Công nghệ Điện tử Tiêu dùng (CES)."
+        ],
+        correct: 1,
+        explanation: "Thuật ngữ 'Industrie 4.0' ra đời lần đầu tiên tại Hội chợ Công nghệ Hannover (Đức) năm 2011."
+      },
+      {
+        id: "synth_q6",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Một nhà tư bản đầu tư 1.000.000 USD với cấu tạo hữu cơ c/v = 4/1. Nếu tỷ suất giá trị thặng dư là 200%, khối lượng giá trị thặng dư (M) thu được là bao nhiêu?",
+        options: ["a. 200.000 USD", "b. 400.000 USD", "c. 1.200.000 USD", "d. 800.000 USD"],
+        correct: 1,
+        explanation: "Cách tính: c/v = 4/1 => v = 1/5 tổng vốn = 200.000 USD. Với m' = 200% => M = v * m' = 200.000 * 200% = 400.000 USD."
+      },
+      {
+        id: "synth_q7",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Tuần hoàn của tư bản trải qua bao nhiêu giai đoạn và dưới các hình thái cơ bản nào?",
+        options: [
+          "a. 4 giai đoạn: Đầu tư, Khai thác, Tiêu thụ và Tái tích lũy.",
+          "b. 3 giai đoạn: Tư bản tiền tệ, Tư bản sản xuất, Tư bản hàng hóa.",
+          "c. 2 giai đoạn: Sản xuất và Lưu thông.",
+          "d. 3 giai đoạn: Tư bản cố định, Tư bản lưu động, Tư bản khả biến."
+        ],
+        correct: 1,
+        explanation: "Tuần hoàn tư bản trải qua 3 giai đoạn, mang 3 hình thái: Tư bản tiền tệ -> Tư bản sản xuất -> Tư bản hàng hóa."
+      },
+      {
+        id: "synth_q8",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Tính hai mặt của lao động sản xuất hàng hóa do C. Mác phát hiện ra, đó là:",
+        options: [
+          "a. Lao động cụ thể và lao động trừu tượng.",
+          "b. Lao động tư nhân và lao động xã hội.",
+          "c. Lao động quá khứ và lao động sống.",
+          "d. Lao động giản đơn và lao động phức tạp."
+        ],
+        correct: 0,
+        explanation: "Lao động sản xuất hàng hóa có tính hai mặt: Lao động cụ thể và Lao động trừu tượng."
+      },
+      {
+        id: "synth_q9",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Hàng hóa là:",
+        options: [
+          "a. Sản phẩm của lao động nhằm thỏa mãn nhu cầu của con người.",
+          "b. Mọi vật thể tồn tại trong tự nhiên.",
+          "c. Sản phẩm của lao động nhằm thỏa mãn nhu cầu của con người thông qua trao đổi, mua bán.",
+          "d. Sản phẩm được làm ra để tặng, cho hoặc tự tiêu dùng."
+        ],
+        correct: 2,
+        explanation: "Hàng hóa là sản phẩm của lao động, thỏa mãn nhu cầu con người và được đi vào tiêu dùng thông qua mua bán trao đổi."
+      },
+      {
+        id: "synth_q10",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Mâu thuẫn về lợi ích kinh tế giữa các chủ thể chủ yếu bắt nguồn từ nguyên nhân nào sau đây?",
+        options: [
+          "a. Do mọi người đều có nhu cầu tiêu dùng giống hệt nhau về mọi mặt.",
+          "b. Do sự can thiệp quá sâu của Nhà nước vào các quan hệ dân sự cá nhân.",
+          "c. Do các chủ thể kinh tế có phương thức khác nhau để thực hiện lợi ích của mình trong điều kiện nguồn lực có hạn.",
+          "d. Do các chủ thể kinh tế không hiểu rõ các chính sách của Đảng và Nhà nước."
+        ],
+        correct: 2,
+        explanation: "Xảy ra do các chủ thể cùng tìm kiếm lợi ích trong điều kiện nguồn lực kinh tế khan hiếm."
+      },
+      {
+        id: "synth_q11",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Sự thống trị của tài phiệt (trùm tài chính) được thực hiện chủ yếu thông qua cơ chế:",
+        options: ["a. Chế độ tham dự.", "b. Chế độ phong kiến.", "c. Chế độ ủy nhiệm độc tôn.", "d. Chế độ bạo lực."],
+        correct: 0,
+        explanation: "Tài phiệt chi phối các tập đoàn thông qua Chế độ tham dự cổ phần."
+      },
+      {
+        id: "synth_q12",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Vì sao trong lưu thông hàng hóa giản đơn mục đích cuối cùng là giá trị sử dụng?",
+        options: [
+          "a. Vì người tham gia muốn thu về một lượng tiền lớn hơn số tiền ban đầu đã bỏ ra.",
+          "b. Vì quá trình này bắt đầu bằng hàng hóa và kết thúc bằng việc tiêu dùng một hàng hóa khác.",
+          "c. Vì tiền đóng vai trò là điểm xuất phát và điểm kết thúc của chu kỳ lưu thông.",
+          "d. Vì hàng hóa trong quá trình này không có giá trị trao đổi trên thị trường."
+        ],
+        correct: 1,
+        explanation: "Công thức H - T - H': Bắt đầu bằng bán hàng hóa H để lấy tiền T, rồi dùng tiền T mua hàng hóa H' về tiêu dùng."
+      },
+      {
+        id: "synth_q13",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Bản chất của giá trị thặng dư (m) theo quan điểm của C. Mác là gì?",
+        options: [
+          "a. Là kết quả của sự hao phí sức lao động không công của công nhân cho nhà tư bản.",
+          "b. Là phần giá trị do máy móc và thiết bị tự động tạo ra trong quá trình vận hành.",
+          "c. Là khoản chênh lệch do nhà tư bản bán hàng hóa cao hơn giá trị thực tế trên thị trường.",
+          "d. Là tiền thưởng mà nhà tư bản nhận được do có công quản lý doanh nghiệp."
+        ],
+        correct: 0,
+        explanation: "Bản chất của m là bộ phận giá trị mới dôi ra ngoài giá trị sức lao động, do công nhân làm thuê tạo ra bị nhà tư bản chiếm đoạt không công."
+      },
+      {
+        id: "synth_q14",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Trong nền kinh tế thị trường định hướng xã hội chủ nghĩa ở Việt Nam, thành phần kinh tế nào giữ vai trò chủ đạo?",
+        options: ["a. Kinh tế nhà nước.", "b. Kinh tế tư nhân.", "c. Kinh tế có vốn đầu tư nước ngoài.", "d. Kinh tế tập thể."],
+        correct: 0,
+        explanation: "Kinh tế nhà nước giữ vai trò chủ đạo trong nền kinh tế thị trường định hướng XHCN."
+      },
+      {
+        id: "synth_q15",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Vì sao công nghiệp hóa, hiện đại hóa ở Việt Nam được khẳng định là có tính tất yếu khách quan?",
+        options: [
+          "a. Vì Việt Nam có lợi thế về nguồn dầu mỏ và than đá lớn nhất thế giới.",
+          "b. Do mong muốn chủ quan của Đảng và Nhà nước Việt Nam.",
+          "c. Vì đây là quy luật phổ biến của sự phát triển lực lượng sản xuất xã hội mà mọi quốc gia đều phải trải qua.",
+          "d. Để phục vụ mục đích mở rộng tầm ảnh hưởng chính trị ra khu vực Đông Nam Á."
+        ],
+        correct: 2,
+        explanation: "CNH - HĐH là quy luật phát triển lực lượng sản xuất khách quan phổ biến đối với các nước quá độ lên CNXH."
+      },
+      {
+        id: "synth_q16",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Kinh tế thị trường định hướng xã hội chủ nghĩa được định nghĩa là nền kinh tế như thế nào?",
+        options: [
+          "a. Nền kinh tế vận hành hoàn toàn theo mệnh lệnh của Nhà nước nhằm đạt được các mục tiêu phúc lợi xã hội tối đa.",
+          "b. Nền kinh tế vận hành theo các quy luật của thị trường, đồng thời hướng tới xác lập một xã hội dân giàu, nước mạnh, dân chủ, công bằng, văn minh.",
+          "c. Nền kinh tế thị trường tự do, không có sự can thiệp của Nhà nước nhằm phát huy tối đa quyền tự chủ của các chủ thể kinh tế.",
+          "d. Nền kinh tế dựa trên sở hữu công cộng tuyệt đối về tư liệu sản xuất và phân phối bình quân mọi nguồn lực xã hội."
+        ],
+        correct: 1,
+        explanation: "Là nền kinh tế vận hành theo các quy luật KTTT khách quan đồng thời gắn liền với định hướng mục tiêu xã hội chủ nghĩa."
+      },
+      {
+        id: "synth_q17",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Giá trị sử dụng của hàng hóa sức lao động có đặc điểm gì khác biệt so với các hàng hóa thông thường?",
+        options: [
+          "a. Nó có khả năng bảo tồn nguyên vẹn giá trị của máy móc mà không cần lao động cụ thể.",
+          "b. Nó chỉ được thể hiện trong quá trình lưu thông trên thị trường tự do.",
+          "c. Giá trị của nó sẽ biến mất hoàn toàn ngay sau khi người mua tiêu dùng xong.",
+          "d. Khi sử dụng nó, nó tạo ra một lượng giá trị mới lớn hơn giá trị của bản thân nó."
+        ],
+        correct: 3,
+        explanation: "Sức lao động có đặc tính thần kỳ: khi tiêu dùng nó tạo ra nguồn giá trị mới lớn hơn giá trị bản thân sức lao động."
+      },
+      {
+        id: "synth_q18",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Mối quan hệ giữa tăng năng suất lao động và lượng giá trị của một đơn vị hàng hóa là gì?",
+        options: [
+          "a. Tỷ lệ thuận.",
+          "b. Không có mối quan hệ.",
+          "c. Tỷ lệ nghịch.",
+          "d. Tỷ lệ thuận khi năng suất tăng, tỷ lệ nghịch khi năng suất giảm."
+        ],
+        correct: 2,
+        explanation: "Năng suất lao động tăng làm giảm thời gian lao động hao phí cho một sản phẩm, tức lượng giá trị 1 đơn vị sản phẩm giảm (tỷ lệ nghịch)."
+      },
+      {
+        id: "synth_q19",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Đối tượng nghiên cứu của kinh tế chính trị Mác - Lênin là:",
+        options: [
+          "a. Nghiên cứu quan hệ sản xuất (QHSX) ở các giai đoạn phát triển của lịch sử.",
+          "b. Nghiên cứu QHSX trong mối quan hệ với LLSX và KTTT ở tất cả các giai đoạn phát triển của lịch sử.",
+          "c. Nghiên cứu QHSX trong mối quan hệ với LLSX và KTTT ở một giai đoạn phát triển nhất định của lịch sử.",
+          "d. Nghiên cứu QHSX trong mối quan hệ với lực lượng sản xuất (LLSX) và kiến trúc thượng tầng (KTTT)."
+        ],
+        correct: 2,
+        explanation: "Nghiên cứu quan hệ sản xuất và trao đổi đặt trong mối tương quan với LLSX và KTTT trong một phương thức sản xuất/giai đoạn lịch sử nhất định."
+      },
+      {
+        id: "synth_q20",
+        chapterId: "tonghop",
+        chapterName: "Bài tập tổng hợp",
+        question: "Theo quy luật giá trị, việc sản xuất và trao đổi hàng hóa phải dựa trên cơ sở:",
+        options: [
+          "a. Hao phí lao động xã hội cần thiết.",
+          "b. Hao phí lao động cá biệt của người sản xuất kém nhất.",
+          "c. Ý muốn của người bán hàng.",
+          "d. Sự thỏa thuận giữa các quốc gia."
+        ],
+        correct: 0,
+        explanation: "Quy luật giá trị đòi hỏi việc sản xuất và trao đổi hàng hóa phải dựa trên cơ sở hao phí lao động xã hội cần thiết."
+      }
+    ];
+
+    // CHAPTER METADATA
+    const CHAPTERS = [
+      { id: "chuong1", name: "Chương 1", title: "Đối tượng, phương pháp nghiên cứu & Chức năng của Kinh tế chính trị", icon: "fa-book-open", color: "from-blue-500 to-indigo-600" },
+      { id: "chuong2", name: "Chương 2", title: "Hàng hóa, thị trường & Vai trò của các chủ thể kinh tế", icon: "fa-scale-balanced", color: "from-indigo-500 to-purple-600" },
+      { id: "chuong3", name: "Chương 3", title: "Giá trị thặng dư trong nền kinh tế thị trường", icon: "fa-chart-line", color: "from-purple-500 to-pink-600" },
+      { id: "chuong4", name: "Chương 4", title: "Cạnh tranh & Độc quyền trong nền kinh tế thị trường", icon: "fa-building-columns", color: "from-pink-500 to-rose-600" },
+      { id: "chuong5", name: "Chương 5", title: "Kinh tế thị trường định hướng XHCN & Quan hệ lợi ích", icon: "fa-handshake-angle", color: "from-rose-500 to-amber-600" },
+      { id: "chuong6", name: "Chương 6", title: "Công nghiệp hóa, hiện đại hóa & Hội nhập kinh tế quốc tế", icon: "fa-network-wired", color: "from-amber-500 to-emerald-600" },
+      { id: "tonghop", name: "Bài tập tổng hợp", title: "Bộ câu hỏi tổng hợp kiến thức toàn bộ chương trình", icon: "fa-cubes", color: "from-emerald-500 to-teal-600" }
+    ];
+
+    // GLOBAL STATE VARIABLES
+    let state = {
+      activeView: 'dashboard', // 'dashboard', 'quiz', 'results'
+      activeChapterId: 'chuong1',
+      quizMode: 'practice', // 'practice', 'exam', 'review_mistakes', 'bookmarks'
+      questions: [],
+      currentIndex: 0,
+      userAnswers: {}, // questionId -> selectedOptionIndex
+      bookmarks: new Set(),
+      mistakes: new Set(),
+      isShuffled: false,
+      fontSizeOffset: 0,
+      
+      // Exam Timer
+      timerInterval: null,
+      timeRemaining: 0, // in seconds
+      isExamSubmitted: false
+    };
+
+    // ON PAGE LOAD INITIALIZATION
+    window.addEventListener('DOMContentLoaded', () => {
+      loadStateFromLocalStorage();
+      initTheme();
+      renderSidebarNav();
+      renderDashboard();
+      updateOverallProgress();
+    });
+
+    // LOCAL STORAGE HANDLING
+    function saveStateToLocalStorage() {
+      try {
+        const data = {
+          userAnswers: state.userAnswers,
+          bookmarks: Array.from(state.bookmarks),
+          mistakes: Array.from(state.mistakes)
+        };
+        localStorage.setItem('ktct_quiz_data_v1', JSON.stringify(data));
+      } catch (e) {
+        console.error("Lỗi khi lưu localStorage:", e);
+      }
+    }
+
+    function loadStateFromLocalStorage() {
+      try {
+        const saved = localStorage.getItem('ktct_quiz_data_v1');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          state.userAnswers = parsed.userAnswers || {};
+          state.bookmarks = new Set(parsed.bookmarks || []);
+          state.mistakes = new Set(parsed.mistakes || []);
+        }
+      } catch (e) {
+        console.error("Lỗi khi tải dữ liệu localStorage:", e);
+      }
+    }
+
+    // THEME TOGGLE
+    function initTheme() {
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+
+    function toggleDarkMode() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+      }
+    }
+
+    // FONT SIZE SCALING
+    function changeFontSize(delta) {
+      state.fontSizeOffset = Math.max(-2, Math.min(4, state.fontSizeOffset + delta));
+      const textContainer = document.getElementById('question-text-container');
+      if (textContainer) {
+        const baseSizes = ['text-sm', 'text-base', 'text-lg', 'text-xl', 'text-2xl'];
+        const targetIndex = Math.min(Math.max(1 + state.fontSizeOffset, 0), baseSizes.length - 1);
+        textContainer.className = `${baseSizes[targetIndex]} font-semibold text-slate-800 dark:text-slate-100 leading-relaxed mb-6`;
+      }
+    }
+
+    // VIEW ROUTING & NAVIGATION
+    function navigateToView(viewName) {
+      state.activeView = viewName;
+      document.getElementById('view-dashboard').classList.add('hidden');
+      document.getElementById('view-quiz').classList.add('hidden');
+      document.getElementById('view-results').classList.add('hidden');
+
+      document.getElementById('grid-toggle-btn').classList.add('hidden');
+      document.getElementById('exam-timer-container').classList.add('hidden');
+
+      if (viewName === 'dashboard') {
+        document.getElementById('view-dashboard').classList.remove('hidden');
+        renderDashboard();
+        updateOverallProgress();
+      } else if (viewName === 'quiz') {
+        document.getElementById('view-quiz').classList.remove('hidden');
+        document.getElementById('grid-toggle-btn').classList.remove('hidden');
+        if (state.quizMode === 'exam') {
+          document.getElementById('exam-timer-container').classList.remove('hidden');
+        }
+      } else if (viewName === 'results') {
+        document.getElementById('view-results').classList.remove('hidden');
+      }
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // RENDER SIDEBAR & CHAPTER LIST
+    function renderSidebarNav() {
+      const navContainer = document.getElementById('chapter-nav-list');
+      navContainer.innerHTML = '';
+
+      CHAPTERS.forEach(ch => {
+        const count = QUIZ_DATA.filter(q => q.chapterId === ch.id).length;
+        const btn = document.createElement('button');
+        btn.onclick = () => startChapterPractice(ch.id);
+        btn.className = `w-full text-left px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition flex items-center justify-between group ${
+          state.activeChapterId === ch.id && state.activeView === 'quiz'
+            ? 'bg-indigo-50 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 font-bold border border-indigo-200 dark:border-indigo-800'
+            : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/60'
+        }`;
+
+        btn.innerHTML = `
+          <div class="flex items-center gap-2.5 truncate">
+            <i class="fa-solid ${ch.icon} text-indigo-500"></i>
+            <span class="truncate">${ch.name}</span>
+          </div>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 font-bold">${count}</span>
+        `;
+        navContainer.appendChild(btn);
+      });
+
+      // Update counters for bookmarks and mistakes
+      document.getElementById('mistakes-count-badge').textContent = state.mistakes.size;
+      document.getElementById('bookmarks-count-badge').textContent = state.bookmarks.size;
+    }
+
+    // RENDER DASHBOARD CARDS
+    function renderDashboard() {
+      const grid = document.getElementById('chapter-cards-grid');
+      grid.innerHTML = '';
+
+      CHAPTERS.forEach((ch, idx) => {
+        const chapterQuestions = QUIZ_DATA.filter(q => q.chapterId === ch.id);
+        const answeredCount = chapterQuestions.filter(q => state.userAnswers[q.id] !== undefined).length;
+        const correctCount = chapterQuestions.filter(q => state.userAnswers[q.id] === q.correct).length;
+        const progressPct = chapterQuestions.length > 0 ? Math.round((answeredCount / chapterQuestions.length) * 100) : 0;
+
+        const card = document.createElement('div');
+        card.className = "bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between space-y-4 group";
+        
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900">
+                ${ch.name}
+              </span>
+              <span class="text-xs font-semibold text-slate-400">
+                ${chapterQuestions.length} câu hỏi
+              </span>
+            </div>
+
+            <h4 class="font-bold text-slate-800 dark:text-slate-100 text-base mb-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition">
+              ${ch.title}
+            </h4>
+
+            <div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 mt-2">
+              <span><i class="fa-solid fa-circle-check text-emerald-500 mr-1"></i>Đúng: ${correctCount}</span>
+              <span><i class="fa-solid fa-clock mr-1"></i>Đã làm: ${answeredCount}/${chapterQuestions.length}</span>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-[11px] font-semibold">
+              <span class="text-slate-400">Tiến độ chương</span>
+              <span class="text-indigo-600 dark:text-indigo-400">${progressPct}%</span>
+            </div>
+            <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+              <div class="bg-indigo-600 h-2 rounded-full transition-all duration-300" style="width: ${progressPct}%"></div>
+            </div>
+
+            <div class="pt-2 flex gap-2">
+              <button onclick="startChapterPractice('${ch.id}')" class="flex-1 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold transition text-center">
+                Luyện Tập Ngay
+              </button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // UPDATE OVERALL STATS
+    function updateOverallProgress() {
+      const total = QUIZ_DATA.length;
+      const answeredKeys = Object.keys(state.userAnswers);
+      const completedCount = answeredKeys.length;
+      
+      let correctCount = 0;
+      answeredKeys.forEach(id => {
+        const q = QUIZ_DATA.find(item => item.id === id);
+        if (q && state.userAnswers[id] === q.correct) {
+          correctCount++;
+        }
+      });
+
+      const overallPct = Math.round((completedCount / total) * 100);
+      const accuracyPct = completedCount > 0 ? Math.round((correctCount / completedCount) * 100) : 0;
+
+      document.getElementById('overall-percentage').textContent = `${overallPct}%`;
+      document.getElementById('overall-progress-bar').style.width = `${overallPct}%`;
+      document.getElementById('total-completed-count').textContent = `${completedCount}/${total}`;
+      document.getElementById('overall-accuracy').textContent = `${accuracyPct}%`;
+
+      renderSidebarNav();
+    }
+
+    // SEARCH QUESTIONS
+    function handleSearchQuestions(query) {
+      const panel = document.getElementById('search-results-panel');
+      const list = document.getElementById('search-results-list');
+      
+      if (!query.trim()) {
+        panel.classList.add('hidden');
+        return;
+      }
+
+      const qLower = query.toLowerCase();
+      const matched = QUIZ_DATA.filter(q => 
+        q.question.toLowerCase().includes(qLower) || 
+        q.options.some(opt => opt.toLowerCase().includes(qLower))
+      );
+
+      list.innerHTML = '';
+      if (matched.length === 0) {
+        list.innerHTML = `<div class="p-4 text-center text-xs text-slate-400">Không tìm thấy câu hỏi phù hợp.</div>`;
+      } else {
+        matched.slice(0, 10).forEach(q => {
+          const item = document.createElement('div');
+          item.className = "p-3 rounded-xl bg-slate-50 dark:bg-slate-700/50 hover:bg-indigo-50 dark:hover:bg-slate-700 border border-slate-100 dark:border-slate-700 cursor-pointer transition text-xs space-y-1";
+          item.onclick = () => {
+            clearSearch();
+            startQuestionDirect(q);
+          };
+          item.innerHTML = `
+            <div class="flex items-center justify-between text-[10px] text-indigo-600 dark:text-indigo-400 font-bold">
+              <span>${q.chapterName}</span>
+              <span>ID: ${q.id}</span>
+            </div>
+            <div class="font-medium text-slate-700 dark:text-slate-200 line-clamp-2">${q.question}</div>
+          `;
+          list.appendChild(item);
+        });
+      }
+
+      panel.classList.remove('hidden');
+    }
+
+    function clearSearch() {
+      document.getElementById('dashboard-search-input').value = '';
+      document.getElementById('search-results-panel').classList.add('hidden');
+    }
+
+    function startQuestionDirect(questionObj) {
+      state.activeChapterId = questionObj.chapterId;
+      state.questions = QUIZ_DATA.filter(q => q.chapterId === questionObj.chapterId);
+      state.currentIndex = state.questions.findIndex(q => q.id === questionObj.id);
+      state.quizMode = 'practice';
+      state.isExamSubmitted = false;
+
+      updateQuizUI();
+      navigateToView('quiz');
+    }
+
+    // START CHAPTER PRACTICE
+    function startChapterPractice(chapterId) {
+      state.activeChapterId = chapterId;
+      state.questions = QUIZ_DATA.filter(q => q.chapterId === chapterId);
+      if (state.isShuffled) {
+        state.questions = [...state.questions].sort(() => Math.random() - 0.5);
+      }
+      state.currentIndex = 0;
+      state.quizMode = 'practice';
+      state.isExamSubmitted = false;
+      clearInterval(state.timerInterval);
+
+      updateQuizUI();
+      navigateToView('quiz');
+    }
+
+    // MOCK EXAM MODE
+    function startMockExam() {
+      state.activeChapterId = 'exam';
+      // Pick 40 random questions across all chapters
+      const shuffled = [...QUIZ_DATA].sort(() => Math.random() - 0.5);
+      state.questions = shuffled.slice(0, 40);
+      state.currentIndex = 0;
+      state.quizMode = 'exam';
+      state.isExamSubmitted = false;
+      
+      // Start 30 minutes timer
+      state.timeRemaining = 30 * 60;
+      startExamTimer();
+
+      updateQuizUI();
+      navigateToView('quiz');
+    }
+
+    // REVIEW MISTAKES MODE
+    function startReviewMistakesMode() {
+      if (state.mistakes.size === 0) {
+        showCustomToast("Bạn chưa có câu nào làm sai!");
+        return;
+      }
+      state.activeChapterId = 'mistakes';
+      state.questions = QUIZ_DATA.filter(q => state.mistakes.has(q.id));
+      state.currentIndex = 0;
+      state.quizMode = 'practice';
+      state.isExamSubmitted = false;
+      clearInterval(state.timerInterval);
+
+      updateQuizUI();
+      navigateToView('quiz');
+    }
+
+    // BOOKMARKS MODE
+    function startBookmarksMode() {
+      if (state.bookmarks.size === 0) {
+        showCustomToast("Bạn chưa lưu câu hỏi nào!");
+        return;
+      }
+      state.activeChapterId = 'bookmarks';
+      state.questions = QUIZ_DATA.filter(q => state.bookmarks.has(q.id));
+      state.currentIndex = 0;
+      state.quizMode = 'practice';
+      state.isExamSubmitted = false;
+      clearInterval(state.timerInterval);
+
+      updateQuizUI();
+      navigateToView('quiz');
+    }
+
+    // EXAM TIMER
+    function startExamTimer() {
+      clearInterval(state.timerInterval);
+      updateTimerDisplay();
+
+      state.timerInterval = setInterval(() => {
+        state.timeRemaining--;
+        updateTimerDisplay();
+
+        if (state.timeRemaining <= 0) {
+          clearInterval(state.timerInterval);
+          showCustomToast("Đã hết thời gian làm bài thi!");
+          submitCurrentQuiz();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(state.timeRemaining / 60);
+      const seconds = state.timeRemaining % 60;
+      const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      const timerEl = document.getElementById('exam-timer');
+      if (timerEl) timerEl.textContent = formatted;
+    }
+
+    // UPDATE QUIZ INTERFACE
+    function updateQuizUI() {
+      if (state.questions.length === 0) return;
+
+      const currentQ = state.questions[state.currentIndex];
+      
+      // Header Titles
+      const chapterInfo = CHAPTERS.find(c => c.id === currentQ.chapterId);
+      document.getElementById('quiz-chapter-title').textContent = chapterInfo ? chapterInfo.name : "Thi Thử";
+      document.getElementById('active-chapter-badge').textContent = chapterInfo ? chapterInfo.name : "Thi Thử";
+      document.getElementById('quiz-header-subtitle').textContent = currentQ.chapterName;
+
+      // Question metadata
+      document.getElementById('current-question-num').textContent = state.currentIndex + 1;
+      document.getElementById('total-question-num').textContent = state.questions.length;
+
+      // Bookmark Button State
+      const bookmarkBtn = document.getElementById('bookmark-btn');
+      if (state.bookmarks.has(currentQ.id)) {
+        bookmarkBtn.className = "w-9 h-9 rounded-xl border border-amber-300 bg-amber-50 text-amber-500 dark:bg-amber-950 dark:border-amber-800 flex items-center justify-center transition";
+        bookmarkBtn.innerHTML = '<i class="fa-solid fa-bookmark text-base"></i>';
+      } else {
+        bookmarkBtn.className = "w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 flex items-center justify-center transition";
+        bookmarkBtn.innerHTML = '<i class="fa-regular fa-bookmark text-base"></i>';
+      }
+
+      // Question Text
+      document.getElementById('question-text-container').textContent = currentQ.question;
+
+      // Mode Controls Active State
+      const btnPractice = document.getElementById('mode-btn-practice');
+      const btnExam = document.getElementById('mode-btn-exam');
+      if (state.quizMode === 'practice') {
+        btnPractice.className = "px-3 py-1 rounded-lg bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm transition font-bold";
+        btnExam.className = "px-3 py-1 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition";
+      } else {
+        btnExam.className = "px-3 py-1 rounded-lg bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-sm transition font-bold";
+        btnPractice.className = "px-3 py-1 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition";
+      }
+
+      // Render Options
+      renderOptions(currentQ);
+
+      // Render Explanation
+      const explanationBox = document.getElementById('explanation-box');
+      const userSelected = state.userAnswers[currentQ.id];
+      if (state.quizMode === 'practice' && userSelected !== undefined) {
+        document.getElementById('explanation-text').textContent = currentQ.explanation || "Chưa có lời giải thích chi tiết cho câu hỏi này.";
+        explanationBox.classList.remove('hidden');
+      } else {
+        explanationBox.classList.add('hidden');
+      }
+
+      // Navigation Buttons & Submit
+      document.getElementById('prev-question-btn').disabled = state.currentIndex === 0;
+      
+      const isLastQuestion = state.currentIndex === state.questions.length - 1;
+      const submitBtn = document.getElementById('submit-quiz-btn');
+      
+      if (state.quizMode === 'exam' || isLastQuestion) {
+        submitBtn.classList.remove('hidden');
+      } else {
+        submitBtn.classList.add('hidden');
+      }
+
+      // Status Pill
+      const statusPill = document.getElementById('question-status-pill');
+      if (userSelected !== undefined) {
+        if (state.quizMode === 'practice') {
+          if (userSelected === currentQ.correct) {
+            statusPill.textContent = "Chính xác";
+            statusPill.className = "text-[11px] font-bold text-emerald-600 dark:text-emerald-400";
+          } else {
+            statusPill.textContent = "Chưa chính xác";
+            statusPill.className = "text-[11px] font-bold text-rose-600 dark:text-rose-400";
+          }
+        } else {
+          statusPill.textContent = "Đã chọn đáp án";
+          statusPill.className = "text-[11px] font-bold text-indigo-600 dark:text-indigo-400";
+        }
+      } else {
+        statusPill.textContent = "Chưa trả lời";
+        statusPill.className = "text-[11px] font-semibold text-slate-400";
+      }
+
+      // Render Quick Question Palette Grid
+      renderQuestionPalette();
+    }
+
+    // RENDER OPTIONS FOR A QUESTION
+    function renderOptions(questionObj) {
+      const container = document.getElementById('options-container');
+      container.innerHTML = '';
+
+      const userSelected = state.userAnswers[questionObj.id];
+
+      questionObj.options.forEach((optText, idx) => {
+        const optionBtn = document.createElement('button');
+        optionBtn.onclick = () => selectAnswer(questionObj.id, idx);
+
+        let optionStyle = "border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-700/30 hover:bg-slate-100 dark:hover:bg-slate-700/70 text-slate-700 dark:text-slate-200";
+        let badgeStyle = "bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300";
+        let iconHtml = '';
+
+        if (state.quizMode === 'practice' && userSelected !== undefined) {
+          if (idx === questionObj.correct) {
+            // Correct option
+            optionStyle = "border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 font-medium";
+            badgeStyle = "bg-emerald-500 text-white font-bold";
+            iconHtml = '<i class="fa-solid fa-circle-check text-emerald-600 dark:text-emerald-400 text-base ml-auto"></i>';
+          } else if (idx === userSelected) {
+            // Wrong option selected by user
+            optionStyle = "border-rose-500 bg-rose-50/80 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200";
+            badgeStyle = "bg-rose-500 text-white font-bold";
+            iconHtml = '<i class="fa-solid fa-circle-xmark text-rose-600 dark:text-rose-400 text-base ml-auto"></i>';
+          }
+        } else if (userSelected === idx) {
+          // Selected in Exam Mode
+          optionStyle = "border-indigo-600 bg-indigo-50/80 dark:bg-indigo-950/40 text-indigo-900 dark:text-indigo-200 font-medium ring-2 ring-indigo-500/30";
+          badgeStyle = "bg-indigo-600 text-white font-bold";
+        }
+
+        const labels = ['A', 'B', 'C', 'D'];
+        optionBtn.className = `w-full text-left p-4 rounded-2xl border transition-all duration-150 flex items-start gap-3.5 shadow-sm text-xs sm:text-sm ${optionStyle}`;
+        
+        optionBtn.innerHTML = `
+          <span class="w-6 h-6 rounded-lg flex items-center justify-center text-xs flex-shrink-0 transition ${badgeStyle}">
+            ${labels[idx] || (idx + 1)}
+          </span>
+          <span class="flex-1 leading-relaxed pt-0.5">${optText}</span>
+          ${iconHtml}
+        `;
+
+        container.appendChild(optionBtn);
+      });
+    }
+
+    // SELECT ANSWER HANDLER
+    function selectAnswer(questionId, optionIndex) {
+      if (state.isExamSubmitted && state.quizMode === 'exam') return;
+
+      const currentQ = state.questions[state.currentIndex];
+      state.userAnswers[questionId] = optionIndex;
+
+      // Update mistakes set
+      if (optionIndex !== currentQ.correct) {
+        state.mistakes.add(questionId);
+      } else {
+        state.mistakes.delete(questionId);
+      }
+
+      saveStateToLocalStorage();
+      updateQuizUI();
+      updateOverallProgress();
+    }
+
+    // RENDER QUESTION PALETTE GRID
+    function renderQuestionPalette() {
+      const desktopGrid = document.getElementById('question-palette-grid');
+      const drawerGrid = document.getElementById('drawer-palette-grid');
+      
+      const htmlContent = state.questions.map((q, idx) => {
+        const userSelected = state.userAnswers[q.id];
+        let btnStyle = "bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200";
+
+        if (idx === state.currentIndex) {
+          btnStyle = "bg-indigo-600 text-white font-bold ring-2 ring-indigo-400 shadow-md";
+        } else if (userSelected !== undefined) {
+          if (state.quizMode === 'practice') {
+            btnStyle = userSelected === q.correct 
+              ? "bg-emerald-500 text-white font-bold" 
+              : "bg-rose-500 text-white font-bold";
+          } else {
+            btnStyle = "bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 font-bold border border-indigo-300";
+          }
+        }
+
+        return `
+          <button onclick="jumpToQuestion(${idx})" class="w-8 h-8 rounded-xl text-xs flex items-center justify-center transition-all duration-150 ${btnStyle}">
+            ${idx + 1}
+          </button>
+        `;
+      }).join('');
+
+      desktopGrid.innerHTML = htmlContent;
+      drawerGrid.innerHTML = htmlContent;
+
+      document.getElementById('palette-progress').textContent = `${Object.keys(state.userAnswers).length}/${state.questions.length}`;
+    }
+
+    function jumpToQuestion(index) {
+      state.currentIndex = index;
+      updateQuizUI();
+      // Close mobile drawer if open
+      document.getElementById('drawer-modal').classList.add('hidden');
+    }
+
+    function navigateQuestion(delta) {
+      const nextIdx = state.currentIndex + delta;
+      if (nextIdx >= 0 && nextIdx < state.questions.length) {
+        state.currentIndex = nextIdx;
+        updateQuizUI();
+      }
+    }
+
+    function toggleCurrentBookmark() {
+      const currentQ = state.questions[state.currentIndex];
+      if (state.bookmarks.has(currentQ.id)) {
+        state.bookmarks.delete(currentQ.id);
+        showCustomToast("Đã bỏ lưu câu hỏi này.");
+      } else {
+        state.bookmarks.add(currentQ.id);
+        showCustomToast("Đã lưu câu hỏi thành công.");
+      }
+      saveStateToLocalStorage();
+      updateQuizUI();
+    }
+
+    function toggleShuffle() {
+      state.isShuffled = !state.isShuffled;
+      const btn = document.getElementById('shuffle-toggle-btn');
+      if (state.isShuffled) {
+        btn.className = "px-3 py-1.5 rounded-xl border border-indigo-300 bg-indigo-50 dark:bg-indigo-950 text-xs font-bold text-indigo-600 dark:text-indigo-300 transition flex items-center gap-1.5";
+        showCustomToast("Đã bật chế độ xáo trộn câu hỏi.");
+      } else {
+        btn.className = "px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-700/50 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 transition flex items-center gap-1.5";
+      }
+    }
+
+    function setQuizMode(mode) {
+      state.quizMode = mode;
+      updateQuizUI();
+    }
+
+    function toggleQuestionPaletteDrawer() {
+      const drawer = document.getElementById('drawer-modal');
+      drawer.classList.toggle('hidden');
+    }
+
+    // SUBMIT EXAM OR QUIZ
+    function submitCurrentQuiz() {
+      clearInterval(state.timerInterval);
+      state.isExamSubmitted = true;
+
+      // Calculate Scores
+      let correctCount = 0;
+      state.questions.forEach(q => {
+        if (state.userAnswers[q.id] === q.correct) {
+          correctCount++;
+        }
+      });
+
+      const total = state.questions.length;
+      const incorrectCount = total - correctCount;
+      const accuracyPct = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+      const score10Scale = (correctCount / total * 10).toFixed(1);
+
+      document.getElementById('result-score-number').textContent = `${score10Scale}/10`;
+      document.getElementById('result-correct-count').textContent = correctCount;
+      document.getElementById('result-incorrect-count').textContent = incorrectCount;
+      document.getElementById('result-accuracy-percent').textContent = `${accuracyPct}%`;
+
+      renderReviewQuestions('all');
+      navigateToView('results');
+      updateOverallProgress();
+    }
+
+    function retryCurrentQuiz() {
+      // Clear answers for current batch
+      state.questions.forEach(q => {
+        delete state.userAnswers[q.id];
+      });
+      state.currentIndex = 0;
+      state.isExamSubmitted = false;
+      saveStateToLocalStorage();
+      
+      if (state.quizMode === 'exam') {
+        state.timeRemaining = 30 * 60;
+        startExamTimer();
+      }
+
+      updateQuizUI();
+      navigateToView('quiz');
+    }
+
+    // RENDER DETAILED REVIEW ITEMS IN RESULT VIEW
+    function renderReviewQuestions(filterType) {
+      const container = document.getElementById('review-questions-list');
+      container.innerHTML = '';
+
+      let filtered = state.questions;
+      if (filterType === 'correct') {
+        filtered = state.questions.filter(q => state.userAnswers[q.id] === q.correct);
+      } else if (filterType === 'incorrect') {
+        filtered = state.questions.filter(q => state.userAnswers[q.id] !== q.correct);
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-xs text-slate-400 bg-white dark:bg-slate-800 rounded-2xl">Không có câu hỏi nào trong danh mục này.</div>`;
+        return;
+      }
+
+      filtered.forEach((q, idx) => {
+        const userAns = state.userAnswers[q.id];
+        const isCorrect = userAns === q.correct;
+
+        const card = document.createElement('div');
+        card.className = `p-5 rounded-2xl border bg-white dark:bg-slate-800 shadow-sm space-y-3 ${
+          isCorrect ? 'border-emerald-200 dark:border-emerald-900/50' : 'border-rose-200 dark:border-rose-900/50'
+        }`;
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between text-xs pb-2 border-b border-slate-100 dark:border-slate-700">
+            <span class="font-bold text-indigo-600 dark:text-indigo-400">Câu ${state.questions.indexOf(q) + 1} (${q.chapterName})</span>
+            <span class="font-bold px-2.5 py-0.5 rounded-full ${
+              isCorrect ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300'
+            }">
+              ${isCorrect ? 'Đúng' : 'Sai'}
+            </span>
+          </div>
+
+          <h4 class="font-semibold text-slate-800 dark:text-slate-100 text-sm leading-relaxed">${q.question}</h4>
+
+          <div class="space-y-1.5 text-xs">
+            ${q.options.map((opt, i) => {
+              let optClass = "p-2.5 rounded-xl border border-slate-100 dark:border-slate-700/60 bg-slate-50 dark:bg-slate-700/30 text-slate-600 dark:text-slate-300";
+              if (i === q.correct) {
+                optClass = "p-2.5 rounded-xl border border-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-200 font-semibold";
+              } else if (i === userAns) {
+                optClass = "p-2.5 rounded-xl border border-rose-300 bg-rose-50 dark:bg-rose-950/60 text-rose-900 dark:text-rose-200 font-semibold";
+              }
+              return `<div class="${optClass}">${opt}</div>`;
+            }).join('')}
+          </div>
+
+          <div class="pt-2 text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700/40 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
+            <span class="font-bold text-indigo-600 dark:text-indigo-400">Giải thích: </span>${q.explanation || 'Đáp án chính xác theo giáo trình.'}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterReviewResults(type) {
+      ['all', 'correct', 'incorrect'].forEach(t => {
+        const btn = document.getElementById(`review-filter-${t}`);
+        if (t === type) {
+          btn.className = "px-3 py-1 rounded-lg text-xs font-semibold bg-indigo-600 text-white";
+        } else {
+          btn.className = "px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300";
+        }
+      });
+      renderReviewQuestions(type);
+    }
+
+    // TOAST NOTIFICATIONS
+    function showCustomToast(message) {
+      const toast = document.createElement('div');
+      toast.className = "fixed bottom-5 right-5 z-50 bg-slate-800 text-white px-4 py-2.5 rounded-2xl text-xs font-medium shadow-xl flex items-center gap-2 animate-bounce";
+      toast.innerHTML = `<i class="fa-solid fa-circle-info text-indigo-400"></i> ${message}`;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, 2500);
+    }
+
+    // RESET DATA CONFIRMATION
+    function confirmResetData() {
+      if (window.confirm("Bạn có chắc chắn muốn xóa toàn bộ lịch sử làm bài và câu hỏi đã lưu?")) {
+        localStorage.removeItem('ktct_quiz_data_v1');
+        state.userAnswers = {};
+        state.bookmarks.clear();
+        state.mistakes.clear();
+        updateOverallProgress();
+        showCustomToast("Đã xóa dữ liệu thành công!");
+      }
+    }
+  </script>
+</body>
+</html>
